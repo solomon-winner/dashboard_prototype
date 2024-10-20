@@ -2,9 +2,13 @@ import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const api = axios.create({
-  baseURL: process.env.API_URL || "https://menu-managment-system.onrender.com",
+  baseURL: process.env.API_URL || "http://localhost:5000",
 });
 
+const incrementVisitorCount = async () => {
+   const response =  await axios.post('/api/visitors/increment');
+    return response.data;
+};
 const fetchMenus = async () => {
   const response = await api.get('/api/menus');
   return response.data;
