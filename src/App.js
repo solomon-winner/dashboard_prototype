@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useMenuItems } from './hooks/useMenuItem';
+import Sidebar from './components/organisms/sideBar';
+import MenuManager from './components/organisms/menuManager';
+
 
 function App() {
+  const { menus, isLoading, error } = useMenuItems();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
+      <Sidebar />
+      <div className="flex-1 p-4 bg-gray overflow-y-auto">
+        <MenuManager menus={menus} />
+      </div>
+    </div> 
+     </>
+
   );
 }
 
