@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowseRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Layout from "./components/templates/mainLayout.js"
 import Home from "./pages/home.jsx"
 // import { useMenuItems } from './hooks/useMenuItem';

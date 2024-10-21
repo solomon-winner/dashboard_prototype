@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { NavBar } from "../atoms/navbar"
 import SideBar from "../organisms/sideBar"
 
