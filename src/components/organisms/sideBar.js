@@ -36,7 +36,7 @@ const SideBar = () => {
 
   if (isMobile) {
     return (
-      <div className="px-8 mt-6">
+      <div className="px-8 mt-6 z-50">
         <RiMenuUnfold3Line
           className="text-xl cursor-pointer text-black"
           onClick={handleToggle}
@@ -59,7 +59,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className={`w-56 h-[37.5rem] bg-green-900 rounded-xl m-2 text-white py-3 px-4 ${isOpen ? "z-[1000]" : "hidden md:block"} fixed` }>
+    <div className={`w-56 h-[37.5rem] bg-green-900 rounded-xl m-2 text-white py-3 px-4 ${isOpen ? "z-[1000]" : "hidden md:block"} fixed z-[1000]` }>
       <div className="flex justify-between items-center">
         <div></div>
       {/* <img src="./assets/image.png" alt="logo" className="w-[70px] h-[21px] mt-2"/> */}
