@@ -1,8 +1,12 @@
 import React from 'react';
-import { useMenuItems } from './hooks/useMenuItem';
-import Sidebar from './components/organisms/sideBar';
-import MenuManager from './components/organisms/menuManager';
-import FirstWindow from './components/organisms/firstWindow.jsx';
+import {BrowseRouter as Router, Routes, Route} from 'react-router-dom'
+import Layout from "./components/templates/mainLayout.js"
+import Home from "./pages/home.jsx"
+// import { useMenuItems } from './hooks/useMenuItem';
+// import Sidebar from './components/organisms/sideBar';
+// import MenuManager from './components/organisms/menuManager';
+// import FirstWindow from './components/organisms/firstWindow.jsx';
+import Testimonies from './pages/testimonies.jsx';
 
 function App() {
   // const { menus, isLoading, error } = useMenuItems();
@@ -16,14 +20,18 @@ function App() {
   // }
 
   return (
-    <>
-    <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
-      <Sidebar />
-      <div className="flex-1 p-4 bg-gray overflow-y-auto">
-        <FirstWindow/>
-      </div>
-    </div> 
-     </>
+    <Router>
+      <Routes>
+    <Route path = "/" element = {<Layout />}>
+      <Route index element = {<Home />} />
+      <Route path='testimony' element = {<Testimonies/>} />
+    {/* <div className="flex flex-1 flex-col md:flex-row overflow-hidden"> */}
+      {/* <div className="flex-1 p-4 bg-gray overflow-y-auto"> */}
+      {/* </div> */}
+    {/* </div>  */}
+    </Route>
+    </Routes>
+  </Router>
 
   );
 }
