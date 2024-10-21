@@ -9,11 +9,11 @@ import { RiMenuUnfold3Line } from "react-icons/ri";
 import Menu from "../atoms/menu";
 
 const menuItems = [
-  { icon: <GiLoveSong />, text: "Songs" },
-  { icon: <HiSpeakerphone />, text: "Testimonies" },
-  { icon: <FaMailBulk />, text: "Subscribers" },
-  { icon: <GrUpdate />, text: "Update information" },
-  { icon: <IoMdSettings />, text: "Settings" },
+  { icon: <GiLoveSong />, text: "Songs", to: "songs"},
+  { icon: <HiSpeakerphone />, text: "Testimonies", to: "testimonies"},
+  { icon: <FaMailBulk />, text: "Subscribers", to: "subscribers"},
+  { icon: <GrUpdate />, text: "Update information", to: "information"},
+  { icon: <IoMdSettings />, text: "Settings", to: "settings"},
 ];
 
 const SideBar = () => {
@@ -66,7 +66,7 @@ const SideBar = () => {
       </div>
       <div className="mt-5 cursor-pointer">
         {menuItems.map((item) => (
-          <Menu key={item.text} icon={item.icon} text={item.text} />
+          <Menu key={item.text} icon={item.icon} text={item.text} to= {item.to}/>
         ))}
       </div>
     </div>
