@@ -2,7 +2,7 @@ import React from 'react';
 import { useMenuItems } from './hooks/useMenuItem';
 import Sidebar from './components/organisms/sideBar';
 import MenuManager from './components/organisms/menuManager';
-
+import FirstWindow from './components/organisms/firstWindow.jsx';
 
 function App() {
   // const { menus, isLoading, error } = useMenuItems();
@@ -10,7 +10,7 @@ function App() {
   // if (isLoading) {
   //   return <div>Loading...</div>;
   // }
-
+  
   // if (error) {
   //   return <div>Error: {error.message}</div>;
   // }
@@ -20,7 +20,7 @@ function App() {
     <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
       <Sidebar />
       <div className="flex-1 p-4 bg-gray overflow-y-auto">
-        {/* <MenuManager menus={menus} /> */}
+        <FirstWindow/>
       </div>
     </div> 
      </>

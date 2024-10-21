@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-const firstWindow = () => {
+const FirstWindow = () => {
+  const visitorChartRef = useRef(null);
+  const subscriberChartRef = useRef(null);
+  const engagementChartRef = useRef(null);
+
   useEffect(() => {
-    // Simulated data
+
     const visitorData = {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
       datasets: [{
@@ -34,10 +38,12 @@ const firstWindow = () => {
       }]
     };
 
-    // Create charts
-    function createChart(id, data) {
-      const ctx = document.getElementById(id).getContext('2d');
-      return new Chart(ctx, {
+    function createChart(ref, data) {
+      if (ref.current) {
+        ref.current.destroy();
+      }
+      const ctx = ref.canvas.getContext('2d');
+      ref.current = new Chart(ctx, {
         type: 'line',
         data: data,
         options: {
@@ -56,16 +62,14 @@ const firstWindow = () => {
       });
     }
 
-    createChart('visitorChart', visitorData);
-    createChart('subscriberChart', subscriberData);
-    createChart('engagementChart', engagementData);
+    createChart(visitorChartRef, visitorData);
+    createChart(subscriberChartRef, subscriberData);
+    createChart(engagementChartRef, engagementData);
 
-    // Update numbers
     document.getElementById('visitorCount').textContent = '3,500';
     document.getElementById('subscriberRate').textContent = '25%';
     document.getElementById('engagementRate').textContent = '40%';
 
-    // Simulated real-time updates
     const interval = setInterval(() => {
       const visitorCount = document.getElementById('visitorCount');
       const subscriberRate = document.getElementById('subscriberRate');
@@ -76,35 +80,38 @@ const firstWindow = () => {
       engagementRate.textContent = (parseFloat(engagementRate.textContent) + Math.random() * 0.1).toFixed(1) + '%';
     }, 5000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (visitorChartRef.current) visitorChartRef.current.destroy();
+      if (subscriberChartRef.current) subscriberChartRef.current.destroy();
+      if (engagementChartRef.current) engagementChartRef.current.destroy();
+    };
   }, []);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="max-w-7xl mx-auto p-6">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
-        </header>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="ml-[13rem] bg-white-100 min-h-screen">
+      <div className=" max-w-5xl mx-auto p-6 ">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Visitors</h2>
             <div className="text-4xl font-bold text-blue-500 my-4" id="visitorCount">Loading...</div>
             <div className="chart">
-              <canvas id="visitorChart"></canvas>
+              <canvas id="visitorChart" ref={el => visitorChartRef.canvas = el}></canvas>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Subscriber Growth Rate</h2>
             <div className="text-4xl font-bold text-green-500 my-4" id="subscriberRate">Loading...</div>
             <div className="chart">
-              <canvas id="subscriberChart"></canvas>
+              <canvas id="subscriberChart" ref={el => subscriberChartRef.canvas = el}></canvas>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Content Engagement</h2>
             <div className="text-4xl font-bold text-red-500 my-4" id="engagementRate">Loading...</div>
             <div className="chart">
-              <canvas id="engagementChart"></canvas>
+              <canvas id="engagementChart" ref={el => engagementChartRef.canvas = el}></canvas>
             </div>
           </div>
         </div>
@@ -113,4 +120,4 @@ const firstWindow = () => {
   );
 };
 
-export default firstWindow;
+export default FirstWindow;
