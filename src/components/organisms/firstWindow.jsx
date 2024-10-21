@@ -94,23 +94,19 @@ const FirstWindow = () => {
     <div className="ml-[13rem] bg-white-100 min-h-screen">
       <div className=" max-w-5xl mx-auto p-6 ">
       <div className="bg-white transition-transform transform flex flex-col align-middle shadow mb-5 fixed top-0 right-0 w-[100%] z-20">
-            <div className="text-2xl font-bold my-4 align-text-bottom justify-around ml-auto flex w-[10%]" id="bnav">
-                <IoIosNotificationsOutline/>
-                <IoLogOutOutline/>
-            </div>
           </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mt-10">
         <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Subscribers</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="visitorCount">300</div>
+            <div className="text-4xl font-bold text-blue-500 my-4" id="subscribersCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Testimonies</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="visitorCount">300</div>
+            <div className="text-4xl font-bold text-blue-500 my-4" id="testimoiesCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Total Songs</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="visitorCount">300</div>
+            <div className="text-4xl font-bold text-blue-500 my-4" id="songCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Visitors</h2>
