@@ -1,6 +1,6 @@
 const Information = () => {
     return (
-        <div className = "">Information Page</div>
+        <div className = "ml-[13rem] bg-white-100 min-h-screen">Information Page</div>
     )
 }
 

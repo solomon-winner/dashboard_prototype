@@ -1,6 +1,6 @@
 const Subscribers = () => {
     return (
-        <div className="">Subscribers page</div>
+        <div className="ml-[13rem] bg-white-100 min-h-screen">Subscribers page</div>
     )
 }
 

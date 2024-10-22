@@ -1,6 +1,6 @@
 const Song = () => {
     return (
-        <div className="">Songs page</div>
+        <div className="ml-[13rem] bg-white-100 min-h-screen">Songs page</div>
     )
 }
 

@@ -1,6 +1,6 @@
 const Testimonies = () => {
     return (
-        <div>Testimonies Page</div>
+        <div className="ml-[13rem] bg-white-100 min-h-screen">Testimonies Page</div>
     )
 }
 
