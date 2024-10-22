@@ -1,5 +1,6 @@
 import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
+import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 
 const Albums = () => {
 
@@ -17,8 +18,10 @@ const Albums = () => {
                 <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
                         <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
-                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-36 bg-black bg-opacity-10 rounded-full font-bold  text-black">
-                        <IoMdAdd/>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
                         </div>
                         </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
@@ -45,9 +48,15 @@ const Albums = () => {
                     </div>
                 </div>
 
-                <div className="w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
+                        </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
@@ -72,9 +81,15 @@ const Albums = () => {
                     </div>
                 </div>
 
-                <div className="w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
+                        </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
@@ -99,9 +114,15 @@ const Albums = () => {
                     </div>
                 </div>
 
-                <div className="w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
+                        </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
@@ -126,9 +147,15 @@ const Albums = () => {
                     </div>
                 </div>
 
-                <div className="w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
+                        </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
@@ -154,9 +181,15 @@ const Albums = () => {
                 </div>
 
 
-                <div className="w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
+                        <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
+                        </div>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
                         <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
