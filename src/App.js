@@ -8,6 +8,10 @@ import Home from "./pages/home.jsx"
 // import FirstWindow from './components/organisms/firstWindow.jsx';
 import Testimonies from './pages/testimonies.jsx';
 import FirstWindow from './components/organisms/firstWindow.jsx';
+import Subscribers from './pages/subscribers.jsx';
+import Song from './pages/songs.jsx';
+import Information from './pages/information.jsx';
+import Settings from './pages/settings.jsx';
 
 function App() {
   // const { menus, isLoading, error } = useMenuItems();
@@ -26,6 +30,11 @@ function App() {
     <Route path = "/" element = {<Layout />}>
       <Route index element = {<FirstWindow />} />
       <Route path='testimonies' element = {<Testimonies/>} />
+      <Route path='subscribers' element = {<Subscribers/>} />
+      <Route path='songs' element = {<Song/>} />
+      <Route path='information' element = {<Information/>} />
+      <Route path='settings' element = {<Settings/>} />
+
     {/* <div className="flex flex-1 flex-col md:flex-row overflow-hidden"> */}
       {/* <div className="flex-1 p-4 bg-gray overflow-y-auto"> */}
       {/* </div> */}
