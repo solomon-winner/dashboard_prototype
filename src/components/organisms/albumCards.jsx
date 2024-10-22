@@ -222,8 +222,8 @@ const Albums = () => {
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
@@ -234,8 +234,8 @@ const Albums = () => {
 
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
@@ -246,8 +246,8 @@ const Albums = () => {
 
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
@@ -258,8 +258,8 @@ const Albums = () => {
 
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
@@ -270,8 +270,8 @@ const Albums = () => {
 
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
@@ -282,8 +282,8 @@ const Albums = () => {
 
                 <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
                 <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
                         </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
