@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { IoLogOutOutline } from "react-icons/io5";
 
 const FirstWindow = () => {
   const visitorChartRef = useRef(null);

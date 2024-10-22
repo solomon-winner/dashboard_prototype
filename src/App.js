@@ -1,13 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Layout from "./components/templates/mainLayout.js"
-import Home from "./pages/home.jsx"
-// import { useMenuItems } from './hooks/useMenuItem';
-// import Sidebar from './components/organisms/sideBar';
-// import MenuManager from './components/organisms/menuManager';
-// import FirstWindow from './components/organisms/firstWindow.jsx';
 import Testimonies from './pages/testimonies.jsx';
-import FirstWindow from './components/organisms/firstWindow.jsx';
+import FirstWindow from './pages/firstWindow.jsx';
 import Subscribers from './pages/subscribers.jsx';
 import Song from './pages/songs.jsx';
 import Information from './pages/information.jsx';
