@@ -1,6 +1,7 @@
 const Subscribers = () => {
     return (
-    <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
+        <>
+    <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5 mb-12">
       <div className=" max-w-5xl mx-auto p-6 ">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
@@ -77,7 +78,13 @@ const Subscribers = () => {
             </div>
             </div>
       </div>
+
     </div>
+          <div className="bg-black w-[100%] transition-transform transform flex flex-col align-middle shadow fixed top-auto bottom-0 right-0 z-20">
+        <input className="bg-white h-10 text-2xl font-bold my-1 align-text-bottom justify-around ml-auto flex w-[75%] mx-14"/>
+    
+    </div>
+    </>
     )
 }
 
