@@ -95,15 +95,15 @@ const FirstWindow = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mt-10">
         <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Subscribers</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="subscribersCount">300</div>
+            <div className="text-4xl font-bold text-green-900 my-4" id="subscribersCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Testimonies</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="testimoiesCount">300</div>
+            <div className="text-4xl font-bold text-green-900 my-4" id="testimoiesCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Total Songs</h2>
-            <div className="text-4xl font-bold text-blue-500 my-4" id="songCount">300</div>
+            <div className="text-4xl font-bold text-green-900 my-4" id="songCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
             <h2 className="text-xl font-semibold text-gray-800">Number of Visitors</h2>

@@ -5,18 +5,18 @@ const Testimonies = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <div className="text-4xl font-bold text-blue-500 my-4" id="subscribersCount">300</div>
-            <h2 className="text-base font-semibold text-gray-800">Total Testimonies</h2>
+            <div className="text-4xl font-bold text-green-900 my-4" id="subscribersCount">300</div>
+            <h2 className="text-base font-semibold text-gray-900">Total Testimonies</h2>
 
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <div className="text-4xl font-bold text-blue-500 my-4" id="testimoiesCount">200</div>
-            <h2 className="text-base font-semibold text-gray-800">Verified of Testimonies</h2>
+            <div className="text-4xl font-bold text-green-900 my-4" id="testimoiesCount">200</div>
+            <h2 className="text-base font-semibold text-gray-900">Verified of Testimonies</h2>
 
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <div className="text-4xl font-bold text-blue-500 my-4" id="testimoiesCount">90%</div>
-            <h2 className="text-base font-semibold text-gray-800">Percentage of Verified Testimonies</h2>
+            <div className="text-4xl font-bold text-green-900 my-4" id="testimoiesCount">90%</div>
+            <h2 className="text-base font-semibold text-gray-900">Percentage of Verified Testimonies</h2>
 
           </div>
           {/* <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
