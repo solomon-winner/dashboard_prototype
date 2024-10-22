@@ -220,7 +220,11 @@ const Albums = () => {
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Single Release</div>
 
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
@@ -228,7 +232,11 @@ const Albums = () => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
 
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
@@ -236,7 +244,11 @@ const Albums = () => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
 
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
@@ -244,7 +256,11 @@ const Albums = () => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
 
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
@@ -252,7 +268,11 @@ const Albums = () => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
 
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
@@ -260,14 +280,17 @@ const Albums = () => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
 
-                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+                        <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
+                        <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
+                        </div>
                     <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
                     <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
                         <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
                     </div>
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
-                {/* Repeat the above SingleSong structure for other single releases */}
             </div>
             <button className="w-36 h-8 flex self-end items-center justify-center bg-white mt-8 mr-16 text-green-600 text-sm font-semibold cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">See More Songs</button>
         </div>
