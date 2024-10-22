@@ -7,6 +7,7 @@ import { MdMenuOpen } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { RiMenuUnfold3Line } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
+import { TbBuildingBroadcastTowerFilled } from "react-icons/tb";
 import Menu from "../atoms/menu";
 
 const menuItems = [
@@ -15,6 +16,7 @@ const menuItems = [
   { icon: <HiSpeakerphone />, text: "Testimonies", to: "testimonies"},
   { icon: <FaMailBulk />, text: "Subscribers", to: "subscribers"},
   { icon: <GrUpdate />, text: "Update information", to: "information"},
+  { icon: <TbBuildingBroadcastTowerFilled />, text: "Post Message", to: "posts"},
   { icon: <IoMdSettings />, text: "Settings", to: "settings"},
 ];
 
