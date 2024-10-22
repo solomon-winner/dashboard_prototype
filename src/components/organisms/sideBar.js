@@ -6,9 +6,11 @@ import { GiLoveSong } from "react-icons/gi";
 import { MdMenuOpen } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { RiMenuUnfold3Line } from "react-icons/ri";
+import { FaHome } from "react-icons/fa";
 import Menu from "../atoms/menu";
 
 const menuItems = [
+  { icon: <FaHome />, text: "Home", to: "/"},
   { icon: <GiLoveSong />, text: "Songs", to: "songs"},
   { icon: <HiSpeakerphone />, text: "Testimonies", to: "testimonies"},
   { icon: <FaMailBulk />, text: "Subscribers", to: "subscribers"},
