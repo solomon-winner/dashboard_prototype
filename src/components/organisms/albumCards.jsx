@@ -1,0 +1,58 @@
+import { useContext } from "react";
+import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
+import { scrollContext } from "../../../utils/scrollContext";
+
+const Albums = () => {
+
+    return (
+        <div className="w-full h-auto flex flex-col w-11/12 mt-5 text-left">
+            <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
+            <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
+                <div className="w-96 h-auto p-5 flex gap-2 shadow-md">
+                    <div className="w-2/5 h-96 flex flex-col items-center gap-1 box-border">
+                        <div className="w-full h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                        <button className="w-full h-12 flex items-center gap-1 bg-green-600 text-white text-lg font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
+                        <button className="w-full h-12 flex items-center gap-1 bg-green-600 text-white text-lg font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
+                        <button className="w-full h-12 flex items-center gap-1 bg-green-600 text-white text-lg font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
+                        <button className="w-full h-12 flex items-center gap-1 bg-green-600 text-white text-lg font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaYoutube />Watch on YouTube</button>
+                    </div>
+                    <div className="w-3/5 h-full flex flex-col justify-center items-start box-border">
+                        <div className="text-2xl font-bold text-green-600 w-full mb-2">Balewletaye (ባለውለታየ)</div>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">1. Wletew Bezabgn</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">2. Zariem hyaw new</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">3. Abetu endante Manew</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">4. Balewletaye Eyesus</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">5. Bante Des Ylegnal</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">6. Gashaye new ersu</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">7. Halieluya</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">8. Bemaleda</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">9. Lamesgnew</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">10. Bietekrstian</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">11. Yesus Selamie new</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">12. Wletew Bezabgn</p>
+                        <p className="text-green-600 w-full m-0 p-1 box-border">13. Eski Meskelh sr</p>
+                        <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
+                    </div>
+                </div>
+                {/* Repeat the above SongCard structure for other albums */}
+            </div>
+
+            <button className="w-36 h-8 flex self-end items-center justify-center bg-white mt-8 mr-16 text-green-600 text-lg cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">See More Albums</button>
+            <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Single Release</div>
+
+            <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
+                <div className="w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
+                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
+                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
+                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
+                    </div>
+                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
+                </div>
+                {/* Repeat the above SingleSong structure for other single releases */}
+            </div>
+            <button className="w-36 h-8 flex self-end items-center justify-center bg-white mt-8 mr-16 text-green-600 text-lg cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">See More Songs</button>
+        </div>
+    );
+};
+
+export default Albums;
