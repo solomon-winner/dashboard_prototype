@@ -1,17 +1,55 @@
-const Information = () => {
+import React, { useState } from 'react';
+
+ const Information = () => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [title, setTitle] = useState('Psalms 95: 1-6');
+    const [content, setContent] = useState('"... Sing joyful songs to the LORD! Praise the mighty rock where we are safe. Come to worship him with thankful hearts and songs of praise. the LORD is the greatest God, king over all other gods..."');
+
+    const handleDivClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+    };
+
+    const handleSave = () => {
+        setIsEditing(false);
+    };
+
     return (
         <div className="ml-[15rem] bg-white-100 min-h-screen ">
             <div className="flex flex-col justify-between gap-10% items-center">
 
     <div className="flex justify-center items-center gap-[10%] w-full h-screen">
-    <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans">
-            <h3>Psalms 95: 1-6</h3>
-            <p>
-                "... Sing joyful songs to the LORD! Praise the mighty rock where we are safe. 
-                Come to worship him with thankful hearts and songs of praise.
-                the LORD is the greatest God, king over all other gods..."
-            </p>
-            
+   <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleDivClick}>
+            {isEditing ? (
+                <>
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={handleTitleChange}
+                        className="border p-2 w-full"
+                    />
+                    <textarea
+                        value={content}
+                        onChange={handleContentChange}
+                        className="border p-2 w-full h-full"
+                    />
+                    <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                        Save
+                    </button>
+                </>
+            ) : (
+                <>
+                    <h3>{title}</h3>
+                    <p>{content}</p>
+                </>
+            )}
         </div>
           <div
         className="w-[500px] h-[80vh] bg-cover bg-center border-b-[15px] border-[#185601] rounded-b-[60%]">
@@ -58,7 +96,7 @@ const Information = () => {
       </div>
     </div>
  </div>   
-             )
-}
+     )
+ }
 
-export default Information;
+ export default Information;
