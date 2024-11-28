@@ -7,7 +7,8 @@ import {
     cardInfoState,
     cardTitleState,
   } from '../state/state';
-  
+import { useRecoilState } from 'recoil';
+
  const Information = () => {
     const [isEditing, setIsEditing] = useRecoilState(isEditingState);
     const [title, setTitle] = useRecoilState(titleState);
