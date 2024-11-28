@@ -25,8 +25,18 @@ export const formTypeState = atom({
   default: 'update',
 });
 
-export const isEditingState = atom({
-  key: 'isEditingState',
+export const isEditingBannerInfoState = atom({
+  key: 'isEditingTitleState',
+  default: false,
+});
+
+export const isEditingCompanyInfoState = atom({
+  key: 'isEditingCompanyInfoState',
+  default: false,
+});
+
+export const isEditigCardInfoState = atom({
+  key: 'isEditingCompanyInfoState',
   default: false,
 });
 

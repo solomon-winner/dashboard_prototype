@@ -1,24 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    isEditingState,
+    isEditingCompanyInfoState,
     titleState,
     contentState,
     companyInfoState,
     cardInfoState,
     cardTitleState,
+    isEditingBannerInfoState,
+    isEditigCardInfoState,
   } from '../state/state';
 import { useRecoilState } from 'recoil';
 
  const Information = () => {
-    const [isEditing, setIsEditing] = useRecoilState(isEditingState);
+    const [isBannerInfoEditing, setisBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
+    const [isCardInfoEditing, setisCardInfoEditing] = useRecoilState(isEditigCardInfoState);
+    const [isEditingCompanyInfo, setisEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
     const [title, setTitle] = useRecoilState(titleState);
     const [content, setContent] = useRecoilState(contentState);
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const [CardTitle, setCardTitle] = useRecoilState(cardTitleState);
   
-    const handleDivClick = () => {
-        setIsEditing(true);
+    const handleBannerDivClick = () => {
+        setisBannerInfoEditing(true);
+    };
+    const handleCardInfoClick = () => {
+        setisCardInfoEditing(true);
+    };
+
+    const handleAboutInfoClick = () => {
+        setisEditingCompanyInfo(true);
     };
 
     const handleTitleChange = (e) => {
@@ -37,7 +48,9 @@ import { useRecoilState } from 'recoil';
         setCompanyInfo(e.target.value);
     };
     const handleSave = () => {
-        setIsEditing(false);
+        setisBannerInfoEditing(false);
+        setisCardInfoEditing(false);
+        setisEditingCompanyInfo(false);
     };
 
     return (
@@ -45,8 +58,8 @@ import { useRecoilState } from 'recoil';
             <div className="flex flex-col justify-between gap-10% items-center">
 
     <div className="flex justify-center items-center gap-[10%] w-full h-screen">
-   <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleDivClick}>
-            {isEditing ? (
+   <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleBannerDivClick}>
+            {isBannerInfoEditing ? (
                 <>
                     <input
                         type="text"
@@ -79,8 +92,8 @@ import { useRecoilState } from 'recoil';
     </div>
 
     <div className="w-full h-auto flex justify-center max-w-full box-border">
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleDivClick}>
-            { isEditing?(
+            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
+            { isCardInfoEditing ? (
                 <>
                 <textarea 
                 value={CardTitle}
@@ -105,8 +118,8 @@ import { useRecoilState } from 'recoil';
                     {CardInfo}
                 </div></>)}
             </div>
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleDivClick}>
-            { isEditing?(
+            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
+            { isCardInfoEditing?(
                 <>
                 <textarea 
                 value={CardTitle}
@@ -131,8 +144,8 @@ import { useRecoilState } from 'recoil';
                     {CardInfo}
                 </div></>)}
             </div>
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleDivClick}>
-            { isEditing?(
+            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
+            { isCardInfoEditing?(
                 <>
                 <textarea 
                 value={CardTitle}
@@ -161,9 +174,9 @@ import { useRecoilState } from 'recoil';
 
         <div className="mt-32 w-full flex justify-center items-center gap-[10%] h-auto">
       <div className="w-2/5 h-[500px] bg-white bg-cover bg-center"></div>
-      <div className="w-2/5 p-2 flex flex-col items-center justify-center text-green-900 font-sans h-[500px]" onClick={handleDivClick}>
+      <div className="w-2/5 p-2 flex flex-col items-center justify-center text-green-900 font-sans h-[500px]" onClick={handleAboutInfoClick}>
         <h2>About</h2>
-        {isEditing? 
+        {isEditingCompanyInfo? 
         <>
         <textarea
         value={companyInfo}
