@@ -137,15 +137,18 @@ import { useRecoilState } from 'recoil';
                     </button>
                 
                 </>):(
-                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
+                    <>
+                    <div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
                     {CardTitle}
                 </div>
                 <div className="text-lg text-green-900 p-2">
                     {CardInfo}
-                </div></>)}
+                </div>
+                </>
+            )}
             </div>
             <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
-            { isCardInfoEditing?(
+            { isCardInfoEditing ? (
                 <>
                 <textarea 
                 value={CardTitle}
