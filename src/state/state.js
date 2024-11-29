@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 export const isEditingBannerInfoState = atom({
-  key: 'isEditingTitleState',
+  key: 'isEditingBannerInfoState',
   default: false,
 });
 

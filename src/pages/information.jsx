@@ -14,7 +14,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
  const Information = () => {
     const isBannerInfoEditing = useRecoilValue(isEditingBannerInfoState)
     const setisBannerInfoEditing = useSetRecoilState(isEditingBannerInfoState);
-    const [isCardInfoEditing, setisCardInfoEditing] = useRecoilState(isEditigCardInfoState);
+    const isCardInfoEditing = useRecoilValue(isEditigCardInfoState);
+    const setisCardInfoEditing = useSetRecoilState(isEditigCardInfoState);
     const [isEditingCompanyInfo, setisEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
     const [title, setTitle] = useRecoilState(titleState);
     const [content, setContent] = useRecoilState(contentState);
@@ -24,13 +25,14 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
   
     const handleBannerDivClick = () => {
         setisBannerInfoEditing(true);
-        setisCardInfoEditing(false);
-        setisEditingCompanyInfo(false);
     };
     const handleCardInfoClick = () => {
         setisCardInfoEditing(true);
+        console.log(isCardInfoEditing)
         setisBannerInfoEditing(false);
         setisEditingCompanyInfo(false);
+        console.log(isCardInfoEditing)
+
     };
 
     const handleAboutInfoClick = () => {
