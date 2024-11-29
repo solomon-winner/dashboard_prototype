@@ -9,10 +9,11 @@ import {
     isEditingBannerInfoState,
     isEditigCardInfoState,
   } from '../state/state';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
  const Information = () => {
-    const [isBannerInfoEditing, setisBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
+    const isBannerInfoEditing = useRecoilValue(isEditingBannerInfoState)
+    const setisBannerInfoEditing = useSetRecoilState(isEditingBannerInfoState);
     const [isCardInfoEditing, setisCardInfoEditing] = useRecoilState(isEditigCardInfoState);
     const [isEditingCompanyInfo, setisEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
     const [title, setTitle] = useRecoilState(titleState);
