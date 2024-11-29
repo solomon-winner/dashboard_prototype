@@ -23,13 +23,19 @@ import { useRecoilState } from 'recoil';
   
     const handleBannerDivClick = () => {
         setisBannerInfoEditing(true);
+        setisCardInfoEditing(false);
+        setisEditingCompanyInfo(false);
     };
     const handleCardInfoClick = () => {
         setisCardInfoEditing(true);
+        setisBannerInfoEditing(false);
+        setisEditingCompanyInfo(false);
     };
 
     const handleAboutInfoClick = () => {
         setisEditingCompanyInfo(true);
+        setisBannerInfoEditing(false);
+        setisCardInfoEditing(false);
     };
 
     const handleTitleChange = (e) => {
@@ -110,13 +116,17 @@ import { useRecoilState } from 'recoil';
                         Save
                     </button>
                 
-                </>):(
-                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
+                </> ) : (
+                    <>
+                    <div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
                     {CardTitle}
                 </div>
                 <div className="text-lg text-green-900 p-2">
                     {CardInfo}
-                </div></>)}
+                </div>
+                </>
+            )
+        }
             </div>
             <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
             { isCardInfoEditing?(
@@ -171,7 +181,9 @@ import { useRecoilState } from 'recoil';
                 </div>
                 <div className="text-lg text-green-900 p-2">
                     {CardInfo}
-                </div></>)}
+                </div></>
+            )
+        }
             </div>
         </div>
 
