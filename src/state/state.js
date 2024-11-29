@@ -11,7 +11,7 @@ export const isEditingCompanyInfoState = atom({
 });
 
 export const isEditigCardInfoState = atom({
-  key: 'isEditingCompanyInfoState',
+  key: 'isEditigCardInfoState',
   default: false,
 });
 

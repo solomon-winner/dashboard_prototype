@@ -9,13 +9,11 @@ import {
     isEditingBannerInfoState,
     isEditigCardInfoState,
   } from '../state/state';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
  const Information = () => {
-    const isBannerInfoEditing = useRecoilValue(isEditingBannerInfoState)
-    const setisBannerInfoEditing = useSetRecoilState(isEditingBannerInfoState);
-    const isCardInfoEditing = useRecoilValue(isEditigCardInfoState);
-    const setisCardInfoEditing = useSetRecoilState(isEditigCardInfoState);
+    const [isBannerInfoEditing, setisBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
+    const [isCardInfoEditing, setisCardInfoEditing] = useRecoilState(isEditigCardInfoState);
     const [isEditingCompanyInfo, setisEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
     const [title, setTitle] = useRecoilState(titleState);
     const [content, setContent] = useRecoilState(contentState);
@@ -25,20 +23,20 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
   
     const handleBannerDivClick = () => {
         setisBannerInfoEditing(true);
+        setisCardInfoEditing(false);
+        setisEditingCompanyInfo(false);
     };
     const handleCardInfoClick = () => {
         setisCardInfoEditing(true);
-        console.log(isCardInfoEditing)
         setisBannerInfoEditing(false);
         setisEditingCompanyInfo(false);
-        console.log(isCardInfoEditing)
-
     };
 
     const handleAboutInfoClick = () => {
         setisEditingCompanyInfo(true);
         setisBannerInfoEditing(false);
         setisCardInfoEditing(false);
+        
     };
 
     const handleTitleChange = (e) => {
@@ -119,49 +117,16 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
                         Save
                     </button>
                 
-                </> ) : (
-                    <>
-                    <div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
+                </>):(
+                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
                     {CardTitle}
                 </div>
                 <div className="text-lg text-green-900 p-2">
                     {CardInfo}
-                </div>
-                </>
-            )
-        }
+                </div></>)}
             </div>
             <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
             { isCardInfoEditing?(
-                <>
-                <textarea 
-                value={CardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="border p-2 w-full">
-                </textarea>
-                <textarea 
-                value={CardInfo}
-                onChange={handleCardInfoChange}
-                className="border p-2 w-full h-full">
-                </textarea>
-                
-                <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
-                        Save
-                    </button>
-                
-                </>):(
-                    <>
-                    <div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
-                    {CardTitle}
-                </div>
-                <div className="text-lg text-green-900 p-2">
-                    {CardInfo}
-                </div>
-                </>
-            )}
-            </div>
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
-            { isCardInfoEditing ? (
                 <>
                 <textarea 
                 value={CardTitle}
@@ -184,9 +149,33 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
                 </div>
                 <div className="text-lg text-green-900 p-2">
                     {CardInfo}
-                </div></>
-            )
-        }
+                </div></>)}
+            </div>
+            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
+            { isCardInfoEditing?(
+                <>
+                <textarea 
+                value={CardTitle}
+                onChange={(e) => setCardTitle(e.target.value)}
+                className="border p-2 w-full">
+                </textarea>
+                <textarea 
+                value={CardInfo}
+                onChange={handleCardInfoChange}
+                className="border p-2 w-full h-full">
+                </textarea>
+                
+                <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                        Save
+                    </button>
+                
+                </>):(
+                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
+                    {CardTitle}
+                </div>
+                <div className="text-lg text-green-900 p-2">
+                    {CardInfo}
+                </div></>)}
             </div>
         </div>
 
