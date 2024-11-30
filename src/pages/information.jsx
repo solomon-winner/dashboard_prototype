@@ -79,8 +79,11 @@ import { useRecoilState } from 'recoil';
                         onChange={handleContentChange}
                         className="border p-2 w-full h-full"
                     />
-
+                    <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                        Save
+                    </button>
                 </>
+                
             ) : (
                 <>
                     <h3>{title}</h3>
@@ -158,10 +161,6 @@ import { useRecoilState } from 'recoil';
                 onChange={handleCardInfoChange}
                 className="border p-2 w-full h-full">
                 </textarea>
-                
-                <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
-                        Save
-                    </button>
                 
                 </>):(
                     <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
