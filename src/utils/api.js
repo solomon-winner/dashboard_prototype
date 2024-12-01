@@ -37,7 +37,7 @@ const deleteMenu = async (id) => {
 export const useIncrementVisitor = () => {
   return useQuery({
     queryKey: 'incrementVisitorCount',
-    queryFn: fetchMenus,
+    queryFn: incrementVisitorCount,
   });
 };
 
