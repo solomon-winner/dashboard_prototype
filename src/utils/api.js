@@ -9,23 +9,23 @@ const incrementVisitorCount = async () => {
    const response =  await axios.post('/api/visitors/increment');
     return response.data;
 };
-const fetchMenus = async () => {
-  const response = await api.get('/api/menus');
+const fetchbannerCards = async () => {
+  const response = await api.get('/api/bannercards');
   return response.data;
 };
 
-const fetchMenuById = async (id) => {
-  const response = await api.get(`/api/menus/${id}`);
+const bannerCardsById = async (id) => {
+  const response = await api.get(`/api/bannercards/${id}`);
   return response.data;
 };
 
-const createMenu = async (menu) => {
-  const response = await api.post('/api/menus', menu);
+const createBannercards = async (bannercards) => {
+  const response = await api.post('/api/bannercards', bannercards);
   return response.data;
 };
 
-const updateMenu = async (menuItem) => {
-  const response = await api.put(`/api/menus/${menuItem.id}`, { name: menuItem.name });
+const updatebannercards = async (bannercards) => {
+  const response = await api.put(`/api/bannercards/${bannercards.id}`, { name: bannercards.name });
   return response.data;
 };
 
@@ -43,32 +43,32 @@ export const useIncrementVisitor = () => {
 
 export const useMenus = () => {
   return useQuery({
-    queryKey: 'menus',
-    queryFn: fetchMenus,
+    queryKey: 'bannerCards',
+    queryFn: fetchbannerCards,
   });
 };
 
 export const useMenuById = (id) => {
   return useQuery({
     queryKey: ['menu', id],
-    queryFn: () => fetchMenuById(id),
+    queryFn: () => bannerCardsById(id),
   });
 };
 
-export const useCreateMenu = () => {
+export const useCreateBannercards = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createMenu,
+    mutationFn: createBannercards,
     onSuccess: () => {
       queryClient.invalidateQueries('menus');
     },
   });
 };
 
-export const useUpdateMenu = () => {
+export const useUpdatebannercards = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateMenu,
+    mutationFn: updatebannercards,
     onSuccess: () => {
       queryClient.invalidateQueries('menus');
     },
