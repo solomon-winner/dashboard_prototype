@@ -9,6 +9,7 @@ const incrementVisitorCount = async () => {
    const response =  await axios.post('/api/visitors/increment');
     return response.data;
 };
+
 const fetchbannerCards = async () => {
   const response = await api.get('/api/bannercards');
   return response.data;
@@ -29,8 +30,8 @@ const updatebannercards = async (bannercards) => {
   return response.data;
 };
 
-const deleteMenu = async (id) => {
-  const response = await api.delete(`/api/menus/${id}`);
+const updateAboutInfo = async (about) => {
+  const response = await api.put(`/api/general/`, { aboutInfo: about });
   return response.data;
 };
 
@@ -41,7 +42,7 @@ export const useIncrementVisitor = () => {
   });
 };
 
-export const useMenus = () => {
+export const usegeneral = () => {
   return useQuery({
     queryKey: 'bannerCards',
     queryFn: fetchbannerCards,
@@ -60,7 +61,7 @@ export const useCreateBannercards = () => {
   return useMutation({
     mutationFn: createBannercards,
     onSuccess: () => {
-      queryClient.invalidateQueries('menus');
+      queryClient.invalidateQueries('general');
     },
   });
 };
@@ -70,17 +71,17 @@ export const useUpdatebannercards = () => {
   return useMutation({
     mutationFn: updatebannercards,
     onSuccess: () => {
-      queryClient.invalidateQueries('menus');
+      queryClient.invalidateQueries('general');
     },
   });
 };
 
-export const useDeleteMenu = () => {
+export const useUpdateAboutInfo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: deleteMenu,
+    mutationFn: updateAboutInfo,
     onSuccess: () => {
-      queryClient.invalidateQueries('menus');
+      queryClient.invalidateQueries('general');
     },
   });
 };

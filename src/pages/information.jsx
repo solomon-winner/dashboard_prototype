@@ -56,11 +56,9 @@ import { useRecoilState } from 'recoil';
     };
     const handleSave = (e) => {
         e.stopPropagation();
-        console.log('Before Save:', { isBannerInfoEditing, isCardInfoEditing, isEditingCompanyInfo });
         setIsBannerInfoEditing(false);
         setIsCardInfoEditing(false);
         setIsEditingCompanyInfo(false);
-        console.log('After Save:', { isBannerInfoEditing, isCardInfoEditing, isEditingCompanyInfo });
     };
 
     return (
