@@ -1,87 +1,34 @@
-import axios from 'axios';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import apiClient from './apiClient';
 
-const api = axios.create({
-  baseURL: process.env.API_URL || "http://localhost:5000",
-});
-
-const incrementVisitorCount = async () => {
-   const response =  await axios.post('/api/visitors/increment');
-    return response.data;
-};
-
-const fetchbannerCards = async () => {
-  const response = await api.get('/api/bannercards');
+// General Info
+export const fetchGeneralInfo = async () => {
+  const response = await apiClient.get('/general-info');
   return response.data;
 };
 
-const bannerCardsById = async (id) => {
-  const response = await api.get(`/api/bannercards/${id}`);
+export const updateGeneralInfo = async (data) => {
+  const response = await apiClient.put('/general-info', data);
   return response.data;
 };
 
-const createBannercards = async (bannercards) => {
-  const response = await api.post('/api/bannercards', bannercards);
+// Banner Cards
+export const fetchBannerCards = async () => {
+  const response = await apiClient.get('/banner-cards');
   return response.data;
 };
 
-const updatebannercards = async (bannercards) => {
-  const response = await api.put(`/api/bannercards/${bannercards.id}`, { name: bannercards.name });
+export const createBannerCard = async (data) => {
+  const response = await apiClient.post('/banner-cards', data);
   return response.data;
 };
 
-const updateAboutInfo = async (about) => {
-  const response = await api.put(`/api/general/`, { aboutInfo: about });
+export const updateBannerCard = async (id, data) => {
+  const response = await apiClient.put(`/banner-cards/${id}`, data);
   return response.data;
 };
 
-export const useIncrementVisitor = () => {
-  return useQuery({
-    queryKey: 'incrementVisitorCount',
-    queryFn: incrementVisitorCount,
-  });
+export const deleteBannerCard = async (id) => {
+  const response = await apiClient.delete(`/banner-cards/${id}`);
+  return response.data;
 };
 
-export const usegeneral = () => {
-  return useQuery({
-    queryKey: 'bannerCards',
-    queryFn: fetchbannerCards,
-  });
-};
-
-export const useMenuById = (id) => {
-  return useQuery({
-    queryKey: ['menu', id],
-    queryFn: () => bannerCardsById(id),
-  });
-};
-
-export const useCreateBannercards = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: createBannercards,
-    onSuccess: () => {
-      queryClient.invalidateQueries('general');
-    },
-  });
-};
-
-export const useUpdatebannercards = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: updatebannercards,
-    onSuccess: () => {
-      queryClient.invalidateQueries('general');
-    },
-  });
-};
-
-export const useUpdateAboutInfo = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: updateAboutInfo,
-    onSuccess: () => {
-      queryClient.invalidateQueries('general');
-    },
-  });
-};
