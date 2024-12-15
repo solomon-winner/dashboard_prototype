@@ -12,9 +12,9 @@ import {
 import { useRecoilState } from 'recoil';
 
  const Information = () => {
-    const [isBannerInfoEditing, setisBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
-    const [isCardInfoEditing, setisCardInfoEditing] = useRecoilState(isEditigCardInfoState);
-    const [isEditingCompanyInfo, setisEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
+    const [isBannerInfoEditing, setIsBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
+    const [isCardInfoEditing, setIsCardInfoEditing] = useRecoilState(isEditigCardInfoState);
+    const [isEditingCompanyInfo, setIsEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
     const [title, setTitle] = useRecoilState(titleState);
     const [content, setContent] = useRecoilState(contentState);
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
@@ -22,20 +22,20 @@ import { useRecoilState } from 'recoil';
     const [CardTitle, setCardTitle] = useRecoilState(cardTitleState);
   
     const handleBannerDivClick = () => {
-        setisBannerInfoEditing(true);
-        setisCardInfoEditing(false);
-        setisEditingCompanyInfo(false);
+        setIsBannerInfoEditing(true);
+        setIsCardInfoEditing(false);
+        setIsEditingCompanyInfo(false);
     };
     const handleCardInfoClick = () => {
-        setisCardInfoEditing(true);
-        setisBannerInfoEditing(false);
-        setisEditingCompanyInfo(false);
+        setIsCardInfoEditing(true);
+        setIsBannerInfoEditing(false);
+        setIsEditingCompanyInfo(false);
     };
 
     const handleAboutInfoClick = () => {
-        setisEditingCompanyInfo(true);
-        setisBannerInfoEditing(false);
-        setisCardInfoEditing(false);
+        setIsEditingCompanyInfo(true);
+        setIsBannerInfoEditing(false);
+        setIsCardInfoEditing(false);
         
     };
 
@@ -54,10 +54,13 @@ import { useRecoilState } from 'recoil';
     const handleCompanyInfoChange = (e) => {
         setCompanyInfo(e.target.value);
     };
-    const handleSave = () => {
-        setisBannerInfoEditing(false);
-        setisCardInfoEditing(false);
-        setisEditingCompanyInfo(false);
+    const handleSave = (e) => {
+        e.stopPropagation();
+        console.log('Before Save:', { isBannerInfoEditing, isCardInfoEditing, isEditingCompanyInfo });
+        setIsBannerInfoEditing(false);
+        setIsCardInfoEditing(false);
+        setIsEditingCompanyInfo(false);
+        console.log('After Save:', { isBannerInfoEditing, isCardInfoEditing, isEditingCompanyInfo });
     };
 
     return (
@@ -91,6 +94,7 @@ import { useRecoilState } from 'recoil';
                 </>
             )}
         </div>
+
           <div
         className="w-[500px] h-[80vh] bg-cover bg-center border-b-[15px] border-[#185601] rounded-b-[60%]">
 
