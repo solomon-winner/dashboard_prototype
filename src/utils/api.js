@@ -1,34 +1,33 @@
 import apiClient from './apiClient';
 
-// General Info
 export const fetchGeneralInfo = async () => {
-  const response = await apiClient.get('/general-info');
+  const response = await apiClient.get('/general');
   return response.data;
 };
 
 export const updateGeneralInfo = async (data) => {
-  const response = await apiClient.put('/general-info', data);
+  const response = await apiClient.put('/general', data);
   return response.data;
 };
 
-// Banner Cards
+
 export const fetchBannerCards = async () => {
-  const response = await apiClient.get('/banner-cards');
+  const response = await apiClient.get('/bannercards');
   return response.data;
 };
 
 export const createBannerCard = async (data) => {
-  const response = await apiClient.post('/banner-cards', data);
+  const response = await apiClient.post('/bannercards', data);
   return response.data;
 };
 
 export const updateBannerCard = async (id, data) => {
-  const response = await apiClient.put(`/banner-cards/${id}`, data);
+  const response = await apiClient.put(`/bannercards/${id}`, data);
   return response.data;
 };
 
 export const deleteBannerCard = async (id) => {
-  const response = await apiClient.delete(`/banner-cards/${id}`);
+  const response = await apiClient.delete(`/bannercards/${id}`);
   return response.data;
 };
 
