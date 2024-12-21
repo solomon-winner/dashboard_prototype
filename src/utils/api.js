@@ -96,7 +96,29 @@ export const removeSubscriber = async () => {
   const response = await apiClient.delete(`/subscribers${id}`);
   return response.data;
 };
+
 export const  addVisitors = async () => {
   const response = await apiClient.post('/visitors');
+  return response.data;
+};
+
+export const fetchTestimonies = async () => {
+  const response = await apiClient.get('/testimonies');
+  return response.data;
+};
+export const addTestimony = async () => {
+  const response = await apiClient.post('/testimonies');
+  return response.data;
+};
+export const updateTestimonies = async () => {
+  const response = await apiClient.put(`/testimonies/${id}`);
+  return response.data;
+};
+export const fetchOneTestimony = async () => {
+  const response = await apiClient.get(`/testimonies${id}`);
+  return response.data;
+};
+export const removeTestimony = async () => {
+  const response = await apiClient.delete(`/testimonies${id}`);
   return response.data;
 };
