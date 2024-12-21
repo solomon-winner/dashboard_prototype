@@ -1,12 +1,12 @@
 import apiClient from './apiClient';
 
 export const login = async () => {
-  const response = await apiClient.get('/authentication');
+  const response = await apiClient.get('/authentication/login');
   return response.data;
 };
 
 export const register = async () => {
-  const response = await apiClient.get('/authentication');
+  const response = await apiClient.get('/authentication/register');
   return response.data;
 };
 
@@ -15,8 +15,18 @@ export const fetchGeneralInfo = async () => {
   return response.data;
 };
 
+export const addGeneralInfo = async () => {
+  const response = await apiClient.post('/general');
+  return response.data;
+};
+
 export const updateGeneralInfo = async (data) => {
   const response = await apiClient.put('/general', data);
+  return response.data;
+};
+
+export const deleteGeneralInfo = async (data) => {
+  const response = await apiClient.delete('/general', data);
   return response.data;
 };
 
