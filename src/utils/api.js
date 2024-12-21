@@ -87,8 +87,16 @@ export const addSubscriber = async () => {
   return response.data;
 };
 
+export const fetchSubscribers = async () => {
+  const response = await apiClient.get('/subscribers');
+  return response.data;
+};
+
 export const removeSubscriber = async () => {
   const response = await apiClient.delete(`/subscribers${id}`);
   return response.data;
 };
-
+export const  addVisitors = async () => {
+  const response = await apiClient.post('/visitors');
+  return response.data;
+};
