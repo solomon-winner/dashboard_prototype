@@ -10,7 +10,6 @@ export const updateGeneralInfo = async (data) => {
   return response.data;
 };
 
-
 export const fetchBannerCards = async () => {
   const response = await apiClient.get('/bannercards');
   return response.data;
