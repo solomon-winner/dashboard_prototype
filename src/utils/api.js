@@ -82,3 +82,13 @@ export const removeSong = async () => {
   return response.data;
 };
 
+export const addSubscriber = async () => {
+  const response = await apiClient.post('/subscribers');
+  return response.data;
+};
+
+export const removeSubscriber = async () => {
+  const response = await apiClient.delete(`/subscribers${id}`);
+  return response.data;
+};
+
