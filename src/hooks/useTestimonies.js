@@ -1,20 +1,26 @@
-import {useQuery,useMutation,useQueryClient} from 'react-query';
-import {fetchTestimonies,removeTestimony} from '../utils/api.js';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { fetchTestimonies, removeTestimony } from '../utils/api.js';
 import handleError from '../utils/errorHandler.js';
+import { useSetRecoilState } from 'recoil';
+import { testimoniesState } from '../state/state.js';
 
 export const useTestimonies = () => {
-    return useQuery('testimonies', fetchTestimonies, {
-            onError: handleError,
-        }
-    );
-}
+  const setTestimonies = useSetRecoilState(testimoniesState);
+
+  return useQuery('testimonies', fetchTestimonies, {
+    onSuccess: (data) => {
+      setTestimonies(data);
+    },
+    onError: handleError,
+  });
+};
 
 export const useRemoveTestimony = () => {
-    const queryClient = useQueryClient();
-    return useMutation(removeTestimony, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('testimonies');
-        },
-        onError: handleError,
-    })
-}
+  const queryClient = useQueryClient();
+  return useMutation(removeTestimony, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('testimonies');
+    },
+    onError: handleError,
+  });
+};
