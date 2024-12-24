@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { fetchGeneralInfo, updateGeneralInfo } from '../utils/api';
-import handleError from './errorHandler.js';
+import { fetchGeneralInfo, updateGeneralInfo } from '../utils/api.js';
+import handleError from '../utils/errorHandler.js';
 
 export const useGeneralInfo = () => {
   return useQuery('generalInfo', fetchGeneralInfo, {

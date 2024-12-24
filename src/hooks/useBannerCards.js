@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { fetchBannerCards, createBannerCard, updateBannerCard, deleteBannerCard } from './api.js';
+import { fetchBannerCards, createBannerCard, updateBannerCard, deleteBannerCard } from '../utils/api.js';
 
 export const useBannerCards = () => {
   return useQuery('bannerCards', fetchBannerCards);

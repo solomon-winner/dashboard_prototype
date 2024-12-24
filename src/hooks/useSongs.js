@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { fetchSongs, addSongs, updateSong, removeSong } from './api';
-import handleError from './errorHandler.js';
+import { fetchSongs, addSongs, updateSong, removeSong } from '../utils/api.js';
+import handleError from '../utils/errorHandler.js';
 
 export const useSongs = () => {
   return useQuery('songs', fetchSongs, {
