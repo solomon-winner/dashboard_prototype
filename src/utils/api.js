@@ -116,10 +116,12 @@ export const fetchTestimonies = async () => {
   const response = await apiClient.get('/testimonies');
   return response.data;
 };
+
 export const addTestimony = async () => {
   const response = await apiClient.post('/testimonies');
   return response.data;
 };
+
 export const updateTestimonies = async () => {
   const response = await apiClient.put(`/testimonies/${id}`);
   return response.data;
