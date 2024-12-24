@@ -1,4 +1,4 @@
-import apiClient from './apiClient';
+import apiClient from './apiClient.js';
 
 export const login = async () => {
   const response = await apiClient.get('/authentication/login');
