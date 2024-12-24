@@ -1,136 +1,300 @@
 import apiClient from './apiClient.js';
+import handleError from './errorHandler.js';
 
+// Authentication
 export const login = async () => {
-  const response = await apiClient.get('/authentication/login');
-  return response.data;
+  try {
+    const response = await apiClient.get('/authentication/login');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const register = async () => {
-  const response = await apiClient.get('/authentication/register');
-  return response.data;
+  try {
+    const response = await apiClient.get('/authentication/register');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
+// General Info
 export const fetchGeneralInfo = async () => {
-  const response = await apiClient.get('/general');
-  return response.data;
+  try {
+    const response = await apiClient.get('/general');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const addGeneralInfo = async () => {
-  const response = await apiClient.post('/general');
-  return response.data;
+export const addGeneralInfo = async (data) => {
+  try {
+    const response = await apiClient.post('/general', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const updateGeneralInfo = async (data) => {
-  const response = await apiClient.put('/general', data);
-  return response.data;
+  try {
+    const response = await apiClient.put('/general', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const deleteGeneralInfo = async (data) => {
-  const response = await apiClient.delete('/general', data);
-  return response.data;
+export const deleteGeneralInfo = async (id) => {
+  try {
+    const response = await apiClient.delete(`/general/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
+// Banner Cards
 export const fetchBannerCards = async () => {
-  const response = await apiClient.get('/bannercards');
-  return response.data;
+  try {
+    const response = await apiClient.get('/bannercards');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const createBannerCard = async (data) => {
-  const response = await apiClient.post('/bannercards', data);
-  return response.data;
+  try {
+    const response = await apiClient.post('/bannercards', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const updateBannerCard = async (id, data) => {
-  const response = await apiClient.put(`/bannercards/${id}`, data);
-  return response.data;
+  try {
+    const response = await apiClient.put(`/bannercards/${id}`, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const deleteBannerCard = async (id) => {
-  const response = await apiClient.delete(`/bannercards/${id}`);
-  return response.data;
+  try {
+    const response = await apiClient.delete(`/bannercards/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
+// Messages
 export const fetchMessages = async () => {
-  const response = await apiClient.get('/messages');
-  return response.data;
-};
-export const addMessages = async () => {
-  const response = await apiClient.post('/messages');
-  return response.data;
-};
-export const updateMessage = async () => {
-  const response = await apiClient.put(`/messages/${id}`);
-  return response.data;
-};
-export const fetchOneMessage = async () => {
-  const response = await apiClient.get(`/messages${id}`);
-  return response.data;
-};
-export const removeMessage = async () => {
-  const response = await apiClient.delete(`/messages${id}`);
-  return response.data;
+  try {
+    const response = await apiClient.get('/messages');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
+export const addMessages = async (data) => {
+  try {
+    const response = await apiClient.post('/messages', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const updateMessage = async (id, data) => {
+  try {
+    const response = await apiClient.put(`/messages/${id}`, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const fetchOneMessage = async (id) => {
+  try {
+    const response = await apiClient.get(`/messages/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const removeMessage = async (id) => {
+  try {
+    const response = await apiClient.delete(`/messages/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+// Songs
 export const fetchSongs = async () => {
-  const response = await apiClient.get('/songs');
-  return response.data;
-};
-export const addSongs = async () => {
-  const response = await apiClient.post('/songs');
-  return response.data;
-};
-export const updateSong = async () => {
-  const response = await apiClient.put(`/songs/${id}`);
-  return response.data;
-};
-export const fetchOneSong = async () => {
-  const response = await apiClient.get(`/songs${id}`);
-  return response.data;
-};
-export const removeSong = async () => {
-  const response = await apiClient.delete(`/songs${id}`);
-  return response.data;
+  try {
+    const response = await apiClient.get('/songs');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const addSubscriber = async () => {
-  const response = await apiClient.post('/subscribers');
-  return response.data;
+export const addSongs = async (data) => {
+  try {
+    const response = await apiClient.post('/songs', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const updateSong = async (id, data) => {
+  try {
+    const response = await apiClient.put(`/songs/${id}`, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const fetchOneSong = async (id) => {
+  try {
+    const response = await apiClient.get(`/songs/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+export const removeSong = async (id) => {
+  try {
+    const response = await apiClient.delete(`/songs/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+};
+
+// Subscribers
+export const addSubscriber = async (data) => {
+  try {
+    const response = await apiClient.post('/subscribers', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
 export const fetchSubscribers = async () => {
-  const response = await apiClient.get('/subscribers');
-  return response.data;
+  try {
+    const response = await apiClient.get('/subscribers');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const removeSubscriber = async () => {
-  const response = await apiClient.delete(`/subscribers${id}`);
-  return response.data;
+export const removeSubscriber = async (id) => {
+  try {
+    const response = await apiClient.delete(`/subscribers/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const  addVisitors = async () => {
-  const response = await apiClient.post('/visitors');
-  return response.data;
+// Visitors
+export const addVisitors = async (data) => {
+  try {
+    const response = await apiClient.post('/visitors', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
+// Testimonies
 export const fetchTestimonies = async () => {
-  const response = await apiClient.get('/testimonies');
-  return response.data;
+  try {
+    const response = await apiClient.get('/testimonies');
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const addTestimony = async () => {
-  const response = await apiClient.post('/testimonies');
-  return response.data;
+export const addTestimony = async (data) => {
+  try {
+    const response = await apiClient.post('/testimonies', data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
 
-export const updateTestimonies = async () => {
-  const response = await apiClient.put(`/testimonies/${id}`);
-  return response.data;
+export const updateTestimonies = async (id, data) => {
+  try {
+    const response = await apiClient.put(`/testimonies/${id}`, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
-export const fetchOneTestimony = async () => {
-  const response = await apiClient.get(`/testimonies${id}`);
-  return response.data;
+
+export const fetchOneTestimony = async (id) => {
+  try {
+    const response = await apiClient.get(`/testimonies/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
-export const removeTestimony = async () => {
-  const response = await apiClient.delete(`/testimonies${id}`);
-  return response.data;
+
+export const removeTestimony = async (id) => {
+  try {
+    const response = await apiClient.delete(`/testimonies/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
 };
