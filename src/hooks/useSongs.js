@@ -1,9 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { fetchSongs, addSongs, updateSong, removeSong } from '../utils/api.js';
 import handleError from '../utils/errorHandler.js';
+import { useSetRecoilState } from 'recoil';
+import { songsState } from '../state/state.js';
 
 export const useSongs = () => {
+  const setSongs = useSetRecoilState(songsState);
+
   return useQuery('songs', fetchSongs, {
+    onSuccess: (data) => {
+      setSongs(data);
+    },
     onError: handleError,
   });
 };
