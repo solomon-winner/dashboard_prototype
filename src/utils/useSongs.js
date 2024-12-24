@@ -1,16 +1,20 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { fetchSongs, addSong, updateSong, removeSong } from './api';
+import { fetchSongs, addSongs, updateSong, removeSong } from './api';
+import handleError from './errorHandler.js';
 
 export const useSongs = () => {
-  return useQuery('songs', fetchSongs);
+  return useQuery('songs', fetchSongs, {
+    onError: handleError,
+  });
 };
 
 export const useAddSong = () => {
   const queryClient = useQueryClient();
-  return useMutation(addSong, {
+  return useMutation(addSongs, {
     onSuccess: () => {
       queryClient.invalidateQueries('songs');
     },
+    onError: handleError,
   });
 };
 
@@ -20,6 +24,7 @@ export const useUpdateSong = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('songs');
     },
+    onError: handleError,
   });
 };
 
@@ -29,5 +34,6 @@ export const useRemoveSong = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('songs');
     },
+    onError: handleError,
   });
 };
