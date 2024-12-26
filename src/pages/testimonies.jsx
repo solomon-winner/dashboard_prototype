@@ -4,9 +4,12 @@ import { testimoniesState } from "../state/state";
 
 const Testimonies = () => {
   const {isLoading, error} = useTestimonies();
-  const testimonies = useRecoilValue(testimoniesState)
+  const testimonies = useRecoilValue(testimoniesState);
+
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>;
+
+  console.log("------->",testimonies);
   
     return (
     <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
