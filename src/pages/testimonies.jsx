@@ -1,4 +1,13 @@
+import { useRecoilValue } from "recoil";
+import { useTestimonies } from "../hooks/useTestimonies.js";
+import { testimoniesState } from "../state/state";
+
 const Testimonies = () => {
+  const {isLoading, error} = useTestimonies();
+  const testimonies = useRecoilValue(testimoniesState)
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>;
+  
     return (
     <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
       <div className=" max-w-5xl mx-auto p-6 ">

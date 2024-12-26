@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchTestimonies, removeTestimony } from '../utils/api.js';
 import handleError from '../utils/errorHandler.js';
 import { useSetRecoilState } from 'recoil';

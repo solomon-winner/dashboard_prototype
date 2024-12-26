@@ -39,3 +39,13 @@ export const cardTitleState = atom({
   key: 'cardTitleState',
   default: 'Join the Mission of Spreading God\'s Love',
 });
+
+export const songsState = atom({
+  key: 'songsState',
+  default: [],
+});
+
+export const testimoniesState = atom({
+  key: 'testimoniesState',
+  default: [],
+});
