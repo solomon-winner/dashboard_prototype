@@ -94,7 +94,7 @@ const FirstWindow = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mt-10">
         <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <h2 className="text-xl font-semibold text-gray-800">Number of Subscribers</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Number of Visitors</h2>
             <div className="text-4xl font-bold text-green-900 my-4" id="subscribersCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
@@ -106,14 +106,14 @@ const FirstWindow = () => {
             <div className="text-4xl font-bold text-green-900 my-4" id="songCount">300</div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <h2 className="text-xl font-semibold text-gray-800">Number of Visitors</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Visitors Growth Rate</h2>
             <div className="text-4xl font-bold text-blue-500 my-4" id="visitorCount">Loading...</div>
             <div className="chart">
               <canvas id="visitorChart" ref={el => visitorChartRef.canvas = el}></canvas>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow p-6 transition-transform transform hover:-translate-y-1">
-            <h2 className="text-xl font-semibold text-gray-800">Subscriber Growth Rate</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Tesimonial Growth Rate</h2>
             <div className="text-4xl font-bold text-green-500 my-4" id="subscriberRate">Loading...</div>
             <div className="chart">
               <canvas id="subscriberChart" ref={el => subscriberChartRef.canvas = el}></canvas>
