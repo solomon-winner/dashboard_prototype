@@ -7,7 +7,9 @@ import { testimoniesState } from '../state/state.js';
 export const useTestimonies = () => {
   const setTestimonies = useSetRecoilState(testimoniesState);
 
-  return useQuery('testimonies', fetchTestimonies, {
+  return useQuery({
+    queryKey: ['testimonies'],  
+    queryFn: fetchTestimonies,
     onSuccess: (data) => {
       setTestimonies(data);
     },
@@ -17,9 +19,11 @@ export const useTestimonies = () => {
 
 export const useRemoveTestimony = () => {
   const queryClient = useQueryClient();
-  return useMutation(removeTestimony, {
+  
+  return useMutation({
+    mutationFn: removeTestimony,
     onSuccess: () => {
-      queryClient.invalidateQueries('testimonies');
+      queryClient.invalidateQueries({ queryKey: ['testimonies'] });  // v5 syntax
     },
     onError: handleError,
   });
