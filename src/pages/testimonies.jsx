@@ -3,7 +3,7 @@ import { useTestimonies } from "../hooks/useTestimonies.js";
 import { testimoniesState } from "../state/state";
 
 const Testimonies = () => {
-  const {isLoading, error} = useTestimonies();
+  const {data,isLoading, error} = useTestimonies();
   const testimonies = useRecoilValue(testimoniesState);
 
   if (isLoading) return <div>Loading...</div>

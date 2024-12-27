@@ -6,10 +6,11 @@ import { testimoniesState } from '../state/state.js';
 
 export const useTestimonies = () => {
   const setTestimonies = useSetRecoilState(testimoniesState);
+
   return useQuery({
     queryKey: ['testimonies'],  
     queryFn: fetchTestimonies,
-    onSuccess: (data) => {  
+    isSuccess: (data) => {
       console.log("testimony data : ",data);
       setTestimonies(data);
     },
