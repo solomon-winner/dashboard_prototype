@@ -6,7 +6,7 @@ const TestimonyDiv = ({ id, email, testimony }) => {
   const removeTestimony = useRemoveTestimony();
 
   const handleVerify = () => {
-    updateTestimony.mutate({ id, data: { isVerified: true } });
+    updateTestimony.mutate({ id, data: { email, testimony, verified: true } });
   };
 
   const handleRemove = () => {
