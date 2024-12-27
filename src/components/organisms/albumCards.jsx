@@ -1,16 +1,35 @@
+import { useState } from "react";
 import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
+import PopupForm from "../molecules/popupform.jsx";
 
 const Albums = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openPopup = () => setIsOpen(true);
+  const closePopup = () => setIsOpen(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    console.log('Form Data:', data);
+    alert('Form submitted successfully!');
+    event.target.reset();
+    closePopup();
+  };
 
     return (
         <div className="w-full h-auto flex flex-col mt-5 text-left">
             <div className="w-full h-auto flex text-left justify-end">
             <div className="w-fit h-auto flex gap-2 text-left ">
-            <button className="w-32 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><IoMdAdd />Add  song</button>
+            <button onClick = {openPopup} className="w-32 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><IoMdAdd />Add  song</button>
             <button className="w-32 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><IoMdAdd />Add  Album</button>
-
+            {isOpen && (
+        <PopupForm closePopup={closePopup} onSubmit={handleSubmit} />
+      )}
             </div>
             </div>
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
