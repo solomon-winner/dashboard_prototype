@@ -1,18 +1,19 @@
-import { useRecoilValue } from "recoil";
-import { useTestimonies } from "../hooks/useTestimonies.js";
-import { testimoniesState } from "../state/state";
-import TestimonyDiv from "../components/atoms/testimonyDiv.jsx";
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { useTestimonies } from '../hooks/useTestimonies.js';
+import { testimoniesState } from '../state/state.js';
+import TestimonyDiv from '../components/atoms/testimonyDiv.jsx';
 
 const Testimonies = () => {
-  const {isLoading, error} = useTestimonies();
+  const { isLoading, error } = useTestimonies();
   const testimonies = useRecoilValue(testimoniesState);
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log("------->",testimonies);
-  
-    return (
+  console.log("Testimonies: ", testimonies);
+
+  return (
     <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
       <div className=" max-w-5xl mx-auto p-6 ">
 
@@ -34,9 +35,18 @@ const Testimonies = () => {
           </div>
         </div>
       </div>
-      <TestimonyDiv/>
-    </div>
-    )
-}
+
+        <div className="mt-15">
+          <ul>
+            {testimonies.map((testimony) => (
+              <li key={testimony.id}>
+                <TestimonyDiv id={testimony.id} email={testimony.email} testimony={testimony.testimony} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+  );
+};
 
 export default Testimonies;

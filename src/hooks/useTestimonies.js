@@ -38,7 +38,7 @@ export const useUpdateTestimony = () => {
 
   const mutation = useMutation({
     mutationFn: ({ id, data }) => updateTestimonies(id, data),
-    retry: 2,  // Retry twice if the mutation fails
+    retry: 2,  
   });
 
   // Invalidate queries on successful mutation
