@@ -34,14 +34,7 @@ const Testimonies = () => {
           </div>
         </div>
       </div>
-{
-  testimonies.map((testimony) => (
-    <li key = {testimony.id}>
-      <TestimonyDiv email = {testimony.email} testimony = {testimony.testimony} />
-
-    </li>
-  ))
-}
+      <TestimonyDiv/>
     </div>
     )
 }

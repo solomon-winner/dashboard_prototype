@@ -33,6 +33,18 @@ export const useTestimonies = () => {
   return { data, isLoading, isError };
 };
 
+export const useUpdateTestimony = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, data }) => updateTestimony(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['testimonies'] }); 
+    },
+    onError: handleError,
+  });
+};
+
 export const useRemoveTestimony = () => {
   const queryClient = useQueryClient();
   
