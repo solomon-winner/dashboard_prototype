@@ -1,6 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchTestimonies, removeTestimony } from '../utils/api.js';
-import handleError from '../utils/errorHandler.js';
+import { fetchTestimonies, removeTestimony, updateTestimonies } from '../utils/api.js';
 import { useSetRecoilState } from 'recoil';
 import { testimoniesState } from '../state/state.js';
 import { useEffect } from 'react';
@@ -33,26 +32,54 @@ export const useTestimonies = () => {
   return { data, isLoading, isError };
 };
 
+// Update Testimony Hook
 export const useUpdateTestimony = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: ({ id, data }) => updateTestimony(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonies'] }); 
-    },
-    onError: handleError,
+  const mutation = useMutation({
+    mutationFn: ({ id, data }) => updateTestimonies(id, data),
+    retry: 2,  // Retry twice if the mutation fails
   });
+
+  // Invalidate queries on successful mutation
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      queryClient.invalidateQueries({ queryKey: ['testimonies'] });
+    }
+  }, [mutation.isSuccess, queryClient]);
+
+  // Handle errors
+  useEffect(() => {
+    if (mutation.isError) {
+      console.error('Error updating testimony:', mutation.error.message);
+    }
+  }, [mutation.isError, mutation.error]);
+
+  return mutation;
 };
 
+// Remove Testimony Hook
 export const useRemoveTestimony = () => {
   const queryClient = useQueryClient();
-  
-  return useMutation({
-    mutationFn: removeTestimony,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['testimonies'] });  // v5 syntax
-    },
-    onError: handleError,
+
+  const mutation = useMutation({
+    mutationFn: (id) => removeTestimony(id),
+    retry: 2,
   });
+
+  // Invalidate queries on successful mutation
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      queryClient.invalidateQueries({ queryKey: ['testimonies'] });
+    }
+  }, [mutation.isSuccess, queryClient]);
+
+  // Handle errors
+  useEffect(() => {
+    if (mutation.isError) {
+      console.error('Error removing testimony:', mutation.error.message);
+    }
+  }, [mutation.isError, mutation.error]);
+
+  return mutation;
 };

@@ -13,7 +13,10 @@ const TestimonyDiv = () => {
       const handleVerify = () => {
         updateTestimony.mutate({ id, data: { isVerified: true } });
       };
-
+      const handleRemove = () => {
+        removeTestimony.mutate({id});
+      };
+      
     return(
         <>
  {
@@ -29,7 +32,7 @@ const TestimonyDiv = () => {
     <div className="w-full h-auto flex text-left justify-end">
         <div className="w-fit h-auto flex gap-2 text-left px-2 pb-3">
         <button onClick = {handleVerify} className="w-36 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-semibold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white">Verify this Testimony</button>
-        <button className="w-36 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-semibold cursor-pointer border border-green-600 box-border mt-2 hover:bg-red-700 hover:text-white">Delete this Testimony</button>
+        <button onClick = {handleRemove} className="w-36 max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-semibold cursor-pointer border border-green-600 box-border mt-2 hover:bg-red-700 hover:text-white">Delete this Testimony</button>
 
         </div>
         </div>
