@@ -9,7 +9,7 @@ const Testimonies = () => {
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log("------->",testimonies);
+  console.log("------->",testimonies,data);
   
     return (
     <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
