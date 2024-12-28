@@ -17,18 +17,17 @@ export default function PopupForm({ closePopup, onSubmit }) {
           Add New Song
         </h2>
         <form onSubmit={onSubmit} className="space-y-4">
-          <FormField label="Title" name="Song title" type="text" required />
           <FormField
             label="Image URL"
             name="img"
             type="url"
             required
-          />
+            isImageField
+          />         
+          <FormField label="Title" name="Song title" type="text" required />
           <FormField
             label="Link URL"
             name="You tube link"
-            type="url"
-            required
           />
           <button
             type="submit"
