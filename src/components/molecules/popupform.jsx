@@ -66,24 +66,12 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Album Title</label>
-                <input
-                  type="text"
-                  name="albumTitle"
-                  className="w-full border-2 border-gray-300 rounded-lg p-2"
-                  required
-                />
+              <FormField label="Album Title" name="albumTitle" type="text" required />
               </div>
 
               {['youtubeLink', 'appleMusicLink', 'spotifyLink', 'amazonLink'].map((link) => (
                 <div key={link} className="mb-4">
-                  <label className="block text-gray-700 mb-2 capitalize">{link.replace('Link', ' Link')}</label>
-                  <input
-                    type="url"
-                    name={link}
-                    className="w-full border-2 border-gray-300 rounded-lg p-2"
-                    required
-                  />
+               <FormField label= {link.replace('Link', ' Link')} name = {link} type="url" required />         
                 </div>
               ))}
 
@@ -91,11 +79,10 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
                 <label className="block text-gray-700 mb-2">Album Songs</label>
                 {songs.map((song, index) => (
                   <div key={index} className="flex items-center gap-2 mb-2">
-                    <input
+                    <FormField
                       type="text"
                       value={song}
                       onChange={(e) => handleSongChange(index, e.target.value)}
-                      className="w-full border-2 border-gray-300 rounded-lg p-2"
                       placeholder="Song Title"
                       required
                     />
