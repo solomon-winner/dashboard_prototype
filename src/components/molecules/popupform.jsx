@@ -12,7 +12,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
     appleMusicLink: '',
     spotifyLink: '',
     amazonLink: '',
-    songs: [''], // Initialize with one empty song title
+    songs: [''],
   });
 
   const handleChange = (e) => {
@@ -84,22 +84,44 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
 
 <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <FormField label="Album Cover Image" name="albumImage" type="file" required isImageField />
+                <FormField 
+                label="Album Cover Image" 
+                name="albumImage" 
+                type="file" 
+                required 
+                isImageField 
+                value={formData.albumImage}
+                onChange={handleChange}
+                />
               </div>
 
               <div className="mb-4">
-              <FormField label="Album Title" name="albumTitle" type="text" required />
+              <FormField 
+              label="Album Title" 
+              name="albumTitle" 
+              type="text" 
+              required 
+              value={formData.albumTitle}
+              onChange={handleChange}
+              />
               </div>
 
               {['youtubeLink', 'appleMusicLink', 'spotifyLink', 'amazonLink'].map((link) => (
                 <div key={link} className="mb-4">
-               <FormField label= {link.replace('Link', ' Link')} name = {link} type="url" required />         
+               <FormField 
+               label= {link.replace('Link', ' Link')} 
+               name = {link} 
+               type="url" 
+               required
+               value={formData[link]}
+               onChange={handleChange}
+               />         
                 </div>
               ))}
 
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Album Songs</label>
-                {songs.map((song, index) => (
+                {formData.songs.map((song, index) => (
                   <div key={index} className="flex items-center gap-2 mb-2">
                     <FormField
                       type="text"
@@ -131,9 +153,31 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
             </>
           ) : (
             <>
-              <FormField label="Song Image" name="songImg" type="url" required isImageField />
-              <FormField label="Song Title" name="songTitle" type="text" required />
-              <FormField label="YouTube Link" name="youtubeLink" type="url" required />
+              <FormField 
+              label="Song Image" 
+              name="songImg" 
+              type="url" 
+              required 
+              isImageField
+              value={formData.img}
+              onChange={handleChange}
+              />
+              <FormField 
+              label="Song Title" 
+              name="songTitle" 
+              type="text" 
+              required 
+              value={formData.songTitle}
+              onChange={handleChange}
+              />
+              <FormField 
+              label="YouTube Link" 
+              name="youtubeLink" 
+              type="url" 
+              required 
+              value={formData.link}
+              onChange={handleChange}
+              />
             </>
           )}
               <button
