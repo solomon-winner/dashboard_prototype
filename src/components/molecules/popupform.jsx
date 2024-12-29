@@ -2,43 +2,65 @@ import { useState } from "react";
 import FormField from "../atoms/FormField.jsx";
 
 export default function PopupForm({ closePopup, onSubmit, formType }) {
-  const [songs, setSongs] = useState(['']);
+  const [formData, setFormData] = useState({
+    albumImage: '',
+    albumTitle: '',
+    songTitle: '',
+    img: '',
+    link: '',
+    youtubeLink: '',
+    appleMusicLink: '',
+    spotifyLink: '',
+    amazonLink: '',
+    songs: [''], // Initialize with one empty song title
+  });
 
-  const handleAddSong = () => {
-    setSongs([...songs, '']);
-  };
-
-  const handleRemoveSong = (index) => {
-    if (songs.length > 1) {
-      const newSongs = songs.filter((_, i) => i !== index);
-      setSongs(newSongs);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSongChange = (index, value) => {
-    const updatedSongs = [...songs];
+    const updatedSongs = [...formData.songs];
     updatedSongs[index] = value;
-    setSongs(updatedSongs);
+    setFormData((prevData) => ({
+      ...prevData,
+      songs: updatedSongs,
+    }));
+  };
+
+  const handleAddSong = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      songs: [...prevData.songs, ''],
+    }));
+  };
+
+  const handleRemoveSong = (index) => {
+    if (formData.songs.length > 1) {
+      const updatedSongs = formData.songs.filter((_, i) => i !== index);
+      setFormData((prevData) => ({
+        ...prevData,
+        songs: updatedSongs,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-
     const albumData = {
-      albumTitle: formData.get('albumTitle'),
-      albumImage: formData.get('albumImage'),
-      youtubeLink: formData.get('youtubeLink'),
-      appleMusicLink: formData.get('appleMusicLink'),
-      spotifyLink: formData.get('spotifyLink'),
-      amazonLink: formData.get('amazonLink'),
-      songs,
+      title: formData.albumTitle,
+      img: formData.albumImage,
+      youtube_link: formData.youtubeLink,
+      spotifyLink: formData.spotifyLink,
+      appleMusicLink: formData.appleMusicLink,
+      amazonLink: formData.amazonLink,
+      albums: formData.songs,
     };
-
-    console.log('Album Data:', albumData);
-    alert('Album added successfully!');
-    e.target.reset();
-    setSongs(['']);
+    onSubmit(albumData);
   };
 
   return (
