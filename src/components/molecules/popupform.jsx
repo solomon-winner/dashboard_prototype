@@ -62,14 +62,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
 
 <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Album Cover Image</label>
-                <input
-                  type="file"
-                  name="albumImage"
-                  accept="image/*"
-                  className="w-full border-2 border-gray-300 rounded-lg p-2"
-                  required
-                />
+                <FormField label="Album Cover Image" name="albumImage" type="file" required isImageField />
               </div>
 
               <div className="mb-4">
@@ -129,8 +122,8 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
             </>
           ) : (
             <>
-              <FormField label="Song Title" name="songTitle" type="text" required />
               <FormField label="Song Image" name="songImg" type="url" required isImageField />
+              <FormField label="Song Title" name="songTitle" type="text" required />
               <FormField label="YouTube Link" name="youtubeLink" type="url" required />
             </>
           )}
