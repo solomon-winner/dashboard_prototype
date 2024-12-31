@@ -3,10 +3,12 @@ import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
+import { useAddSong } from "../../hooks/useSongs.js";
 
 const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
+  const addSong = useAddSong();
 
   const openPopup = (type) => {
     setFormType(type);
@@ -21,7 +23,6 @@ const Albums = () => {
     const data = Object.fromEntries(formData);
 
     console.log('Form Data:', data);
-    alert('Form submitted successfully!');
     event.target.reset();
     closePopup();
   };
