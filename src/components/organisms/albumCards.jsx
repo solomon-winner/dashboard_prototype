@@ -11,7 +11,9 @@ const Albums = () => {
   const openPopup = (type) => {
     setFormType(type);
     setIsOpen(true);
-  };  const closePopup = () => setIsOpen(false);
+  };  
+  
+  const closePopup = () => setIsOpen(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
