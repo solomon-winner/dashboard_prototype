@@ -3,9 +3,8 @@ import FormField from "../atoms/FormField.jsx";
 
 export default function PopupForm({ closePopup, onSubmit, formType }) {
   const [formData, setFormData] = useState({
-    albumImage: '',
-    albumTitle: '',
-    songTitle: '',
+    img: '',
+    title: '',
     img: '',
     link: '',
     youtubeLink: '',
@@ -52,8 +51,8 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const albumData = {
-      title: formData.albumTitle,
-      img: formData.albumImage,
+      title: formData.title,
+      img: formData.img,
       youtube_link: formData.youtubeLink,
       spotifyLink: formData.spotifyLink,
       appleMusicLink: formData.appleMusicLink,
@@ -82,15 +81,14 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
           {formType === 'album' ? (
             <>
 
-<form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <FormField 
                 label="Album Cover Image" 
-                name="albumImage" 
+                name="img" 
                 type="file" 
                 required 
                 isImageField 
-                value={formData.albumImage}
+                value={formData.img}
                 onChange={handleChange}
                 />
               </div>
@@ -149,13 +147,12 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               </div>
 
 
-            </form>
             </>
           ) : (
             <>
               <FormField 
               label="Song Image" 
-              name="songImg" 
+              name="img" 
               type="url" 
               required 
               isImageField
@@ -164,10 +161,10 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               />
               <FormField 
               label="Song Title" 
-              name="songTitle" 
+              name="title" 
               type="text" 
               required 
-              value={formData.songTitle}
+              value={formData.title}
               onChange={handleChange}
               />
               <FormField 
@@ -175,7 +172,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               name="youtubeLink" 
               type="url" 
               required 
-              value={formData.link}
+              value={formData.youtubeLink}
               onChange={handleChange}
               />
             </>

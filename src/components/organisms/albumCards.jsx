@@ -23,6 +23,7 @@ const Albums = () => {
     const data = Object.fromEntries(formData);
 
     console.log('Form Data:', data);
+    addSong.mutate(data);
     event.target.reset();
     closePopup();
   };
