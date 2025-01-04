@@ -77,7 +77,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
           {formType === 'album' ? 'Add New Album' : 'Add New Song'}
         </h2>
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} className="space-y-4" encType="multipart/form-data">
           {formType === 'album' ? (
             <>
 
@@ -153,7 +153,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               <FormField 
               label="Song Image" 
               name="img" 
-              type="url" 
+              type="file" 
               required 
               isImageField
               value={formData.img}
