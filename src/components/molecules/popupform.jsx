@@ -49,20 +49,6 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const albumData = {
-      title: formData.title,
-      img: formData.img,
-      youtube_link: formData.youtubeLink,
-      spotifyLink: formData.spotifyLink,
-      appleMusicLink: formData.appleMusicLink,
-      amazonLink: formData.amazonLink,
-      albums: formData.songs,
-    };
-    onSubmit(albumData);
-  };
-
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 "

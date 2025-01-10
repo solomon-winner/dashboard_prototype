@@ -21,7 +21,6 @@ const Albums = () => {
     event.preventDefault();
 
       const formElement = event.target;
-      console.log('Enctype:', formElement.enctype); // This should log "multipart/form-data"
     
       if (formElement.enctype === "multipart/form-data") {
         const formData = new FormData(formElement);
