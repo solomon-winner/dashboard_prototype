@@ -10,6 +10,7 @@ import {
     isEditigCardInfoState,
   } from '../state/state';
 import { useRecoilState } from 'recoil';
+import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
 
  const Information = () => {
     const [isBannerInfoEditing, setIsBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
@@ -20,12 +21,14 @@ import { useRecoilState } from 'recoil';
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const [CardTitle, setCardTitle] = useRecoilState(cardTitleState);
-  
+    const updateBannerInfo = useUpdateGeneralInfo();
+
     const handleBannerDivClick = () => {
         setIsBannerInfoEditing(true);
         setIsCardInfoEditing(false);
         setIsEditingCompanyInfo(false);
     };
+
     const handleCardInfoClick = () => {
         setIsCardInfoEditing(true);
         setIsBannerInfoEditing(false);
@@ -60,6 +63,16 @@ import { useRecoilState } from 'recoil';
         setIsCardInfoEditing(false);
         setIsEditingCompanyInfo(false);
     };
+    const handleBannerSubmit = (e) => {
+        e.preventDefault();
+
+        const formElement = e.target;
+
+          const formData = new FormData(formElement);
+  
+      updateBannerInfo.mutate(formData);
+      formElement.reset();
+    }
 
     return (
         <div className="ml-[15rem] bg-white-100 min-h-screen ">
@@ -68,7 +81,7 @@ import { useRecoilState } from 'recoil';
     <div className="flex justify-center items-center gap-[10%] w-full h-screen">
    <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleBannerDivClick}>
             {isBannerInfoEditing ? (
-                <>
+                <form onSubmit={handleBannerSubmit} >
                     <input
                         type="text"
                         value={title}
@@ -80,10 +93,10 @@ import { useRecoilState } from 'recoil';
                         onChange={handleContentChange}
                         className="border p-2 w-full h-full"
                     />
-                    <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                    <button type = "submit" onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
                         Save
                     </button>
-                </>
+                </form>
                 
             ) : (
                 <>
