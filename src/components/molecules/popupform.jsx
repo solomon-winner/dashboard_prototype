@@ -2,6 +2,7 @@ import { useState } from "react";
 import FormField from "../atoms/FormField.jsx";
 
 export default function PopupForm({ closePopup, onSubmit, formType }) {
+  
   const [formData, setFormData] = useState({
     img: '',
     title: '',

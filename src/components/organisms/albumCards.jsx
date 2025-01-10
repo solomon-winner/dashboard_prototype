@@ -20,11 +20,11 @@ const Albums = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value); 
+      }
 
-    console.log('Form Data:', data);
-
-    addSong.mutate(data);
+    addSong.mutate(formData);
     event.target.reset();
     closePopup();
   };
