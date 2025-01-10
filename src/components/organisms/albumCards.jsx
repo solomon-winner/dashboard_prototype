@@ -19,15 +19,21 @@ const Albums = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    for (const [key, value] of formData.entries()) {
-        console.log(`${key}:`, value); 
-      }
+
+      const formElement = event.target;
+      console.log('Enctype:', formElement.enctype); // This should log "multipart/form-data"
+    
+      if (formElement.enctype === "multipart/form-data") {
+        const formData = new FormData(formElement);
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}:`, value); 
+        }
 
     addSong.mutate(formData);
     event.target.reset();
     closePopup();
-  };
+  }
+};
 
     return (
         <div className="w-full h-auto flex flex-col mt-5 text-left">
