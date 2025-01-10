@@ -83,7 +83,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               <div className="mb-4">
               <FormField 
               label="Album Title" 
-              name="albumTitle" 
+              name="title" 
               type="text" 
               required 
               value={formData.albumTitle}
