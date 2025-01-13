@@ -59,19 +59,30 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     };
     const handleSave = (e) => {
         e.stopPropagation();
+        e.preventDefault();
+        const formElement = e.target;
+
+        const formData = new FormData(formElement);
+    
+        updateBannerInfo.mutate(formData);
+        formElement.reset();
+        
         setIsBannerInfoEditing(false);
         setIsCardInfoEditing(false);
         setIsEditingCompanyInfo(false);
     };
-    const handleBannerSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formElement = e.target;
+      const formElement = e.target;
 
-          const formData = new FormData(formElement);
+      const formData = new FormData(formElement);
   
       updateBannerInfo.mutate(formData);
       formElement.reset();
+      setIsBannerInfoEditing(false);
+      setIsCardInfoEditing(false);
+      setIsEditingCompanyInfo(false);
     }
 
     return (
@@ -81,7 +92,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     <div className="flex justify-center items-center gap-[10%] w-full h-screen">
    <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleBannerDivClick}>
             {isBannerInfoEditing ? (
-                <form onSubmit={handleBannerSubmit} >
+                <form onSubmit={handleSubmit} >
                     <input
                         type="text"
                         value={title}
@@ -93,7 +104,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
                         onChange={handleContentChange}
                         className="border p-2 w-full h-full"
                     />
-                    <button type = "submit" onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                    <button type = "submit" className="mt-2 p-2 bg-blue-500 text-white">
                         Save
                     </button>
                 </form>
@@ -117,7 +128,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     <div className="w-full h-auto flex justify-center max-w-full box-border">
             <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
             { isCardInfoEditing ? (
-                <>
+                <form onSubmit={handleSubmit}>
                 <textarea 
                 value={CardTitle}
                 onChange={(e) => setCardTitle(e.target.value)}
@@ -129,11 +140,11 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
                 className="border p-2 w-full h-full">
                 </textarea>
                 
-                <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+                <button type='submit' className="mt-2 p-2 bg-blue-500 text-white">
                         Save
                     </button>
                 
-                </>):(
+                </form>):(
                     <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
                     {CardTitle}
                 </div>
@@ -192,7 +203,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
       <div className="w-2/5 p-2 flex flex-col items-center justify-center text-green-900 font-sans h-[500px]" onClick={handleAboutInfoClick}>
         <h2>About</h2>
         {isEditingCompanyInfo? 
-        <>
+        <form onSubmit={handleSubmit}>
         <textarea
         value={companyInfo}
         onChange={handleCompanyInfoChange}
@@ -200,10 +211,10 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
         >
             
         </textarea>
-        <button onClick={handleSave} className="mt-2 p-2 bg-blue-500 text-white">
+        <button type='submit' className="mt-2 p-2 bg-blue-500 text-white">
           Save
         </button>
-        </>
+        </form>
         :
         <p>
             {companyInfo}
