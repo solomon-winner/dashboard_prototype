@@ -21,7 +21,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const [CardTitle, setCardTitle] = useRecoilState(cardTitleState);
-    const updateBannerInfo = useUpdateGeneralInfo();
+    const updateGeneralInfo = useUpdateGeneralInfo();
 
     const handleBannerDivClick = () => {
         setIsBannerInfoEditing(true);
@@ -57,30 +57,16 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const handleCompanyInfoChange = (e) => {
         setCompanyInfo(e.target.value);
     };
-    const handleSave = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const formElement = e.target;
-
-        const formData = new FormData(formElement);
-    
-        updateBannerInfo.mutate(formData);
-        formElement.reset();
-        
-        setIsBannerInfoEditing(false);
-        setIsCardInfoEditing(false);
-        setIsEditingCompanyInfo(false);
-    };
 
     const handleSubmit = (e) => {
       e.preventDefault();
-
-      const formElement = e.target;
-
-      const formData = new FormData(formElement);
-  
-      updateBannerInfo.mutate(formData);
-      formElement.reset();
+        const formData = {
+            bannerTitle: title,
+            bannerInfo: content,
+            aboutInfo: companyInfo
+        }
+      console.log("Form_data:",formData)
+      updateGeneralInfo.mutate(formData);
       setIsBannerInfoEditing(false);
       setIsCardInfoEditing(false);
       setIsEditingCompanyInfo(false);

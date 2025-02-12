@@ -45,6 +45,7 @@ export const addGeneralInfo = async (data) => {
 export const updateGeneralInfo = async (data) => {
   try {
     const response = await apiClient.put('/general', data);
+    console.log("This is from API:",data,response)
     return response.data;
   } catch (error) {
     handleError(error);
