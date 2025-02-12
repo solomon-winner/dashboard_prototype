@@ -32,7 +32,12 @@ export const companyInfoState = atom({
 
 export const cardInfoState = atom({
   key: 'cardInfoState',
-  default: 'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.',
+  default: [
+    {
+    title:'Join the Mission of Spreading God\'s Love',
+    description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
+  }
+]
 });
 
 export const cardTitleState = atom({
@@ -49,3 +54,4 @@ export const testimoniesState = atom({
   key: 'testimoniesState',
   default: [],
 });
+
