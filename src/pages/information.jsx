@@ -57,20 +57,20 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const handleCompanyInfoChange = (e) => {
         setCompanyInfo(e.target.value);
     };
-    // const handleSave = (e) => {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     const formElement = e.target;
+    const handleSave = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const formElement = e.target;
 
-    //     const formData = new FormData(formElement);
+        const formData = new FormData(formElement);
     
-    //     updateBannerInfo.mutate(formData);
-    //     formElement.reset();
+        updateBannerInfo.mutate(formData);
+        formElement.reset();
         
-    //     setIsBannerInfoEditing(false);
-    //     setIsCardInfoEditing(false);
-    //     setIsEditingCompanyInfo(false);
-    // };
+        setIsBannerInfoEditing(false);
+        setIsCardInfoEditing(false);
+        setIsEditingCompanyInfo(false);
+    };
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -129,7 +129,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     <div className="w-full h-auto flex justify-center max-w-full box-border">
             <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
             { isCardInfoEditing ? (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='w-full h-full'>
                 <textarea 
                 value={CardTitle}
                 onChange={(e) => setCardTitle(e.target.value)}
@@ -204,7 +204,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
       <div className="w-2/5 p-2 flex flex-col items-center justify-center text-green-900 font-sans h-[500px]" onClick={handleAboutInfoClick}>
         <h2>About</h2>
         {isEditingCompanyInfo?
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='w-full h-full'>
         <textarea
         value={companyInfo}
         onChange={handleCompanyInfoChange}
