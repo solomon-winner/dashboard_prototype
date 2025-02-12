@@ -17,9 +17,11 @@ export const useGeneralInfo = () => {
 
 export const useUpdateGeneralInfo = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateGeneralInfo, {
+  
+  return useMutation({
+    mutationFn: updateGeneralInfo,  
     onSuccess: () => {
-      queryClient.invalidateQueries('generalInfo');
+      queryClient.invalidateQueries({ queryKey: ['generalInfo'] });
     },
     onError: handleError,
   });

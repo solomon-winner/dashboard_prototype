@@ -22,7 +22,6 @@ export const register = async () => {
   }
 };
 
-// General Info
 export const fetchGeneralInfo = async () => {
   try {
     const response = await apiClient.get('/general');

@@ -57,22 +57,23 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const handleCompanyInfoChange = (e) => {
         setCompanyInfo(e.target.value);
     };
-    const handleSave = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const formElement = e.target;
+    // const handleSave = (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     const formElement = e.target;
 
-        const formData = new FormData(formElement);
+    //     const formData = new FormData(formElement);
     
-        updateBannerInfo.mutate(formData);
-        formElement.reset();
+    //     updateBannerInfo.mutate(formData);
+    //     formElement.reset();
         
-        setIsBannerInfoEditing(false);
-        setIsCardInfoEditing(false);
-        setIsEditingCompanyInfo(false);
-    };
+    //     setIsBannerInfoEditing(false);
+    //     setIsCardInfoEditing(false);
+    //     setIsEditingCompanyInfo(false);
+    // };
+
     const handleSubmit = (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
       const formElement = e.target;
 
@@ -89,7 +90,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
         <div className="ml-[15rem] bg-white-100 min-h-screen ">
             <div className="flex flex-col justify-between gap-10% items-center">
 
-    <div className="flex justify-center items-center gap-[10%] w-full h-screen">
+   <div className="flex justify-center items-center gap-[10%] w-full h-screen">
    <div className="flex flex-col items-center justify-end gap-1 w-[400px] h-[55vh] font-sans" onClick={handleBannerDivClick}>
             {isBannerInfoEditing ? (
                 <form onSubmit={handleSubmit} >
@@ -202,7 +203,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
       <div className="w-2/5 h-[500px] bg-white bg-cover bg-center"></div>
       <div className="w-2/5 p-2 flex flex-col items-center justify-center text-green-900 font-sans h-[500px]" onClick={handleAboutInfoClick}>
         <h2>About</h2>
-        {isEditingCompanyInfo? 
+        {isEditingCompanyInfo?
         <form onSubmit={handleSubmit}>
         <textarea
         value={companyInfo}
