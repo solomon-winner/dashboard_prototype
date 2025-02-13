@@ -10,9 +10,9 @@ export const isEditingCompanyInfoState = atom({
   default: false,
 });
 
-export const isEditigCardInfoState = atom({
-  key: 'isEditigCardInfoState',
-  default: false,
+export const editingCardIdState = atom({
+  key: 'editingCardIdState',
+  default: null,
 });
 
 export const titleState = atom({
@@ -34,17 +34,17 @@ export const cardInfoState = atom({
   key: 'cardInfoState',
   default: [
     {
-    _id: '43564564778797890809',
+    _id: '43564564778797890801',
     title:'Join the Mission of Spreading God\'s Love',
     description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
   },
    {
-    _id: '43564564778797890809',
+    _id: '43564564778797890802',
     title:'Join the Mission of Spreading God\'s Love',
     description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
   },
   {
-    _id: '43564564778797890809',
+    _id: '43564564778797890803',
     title:'Join the Mission of Spreading God\'s Love',
     description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
   }
