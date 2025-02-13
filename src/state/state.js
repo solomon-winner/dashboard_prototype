@@ -34,6 +34,17 @@ export const cardInfoState = atom({
   key: 'cardInfoState',
   default: [
     {
+    _id: '43564564778797890809',
+    title:'Join the Mission of Spreading God\'s Love',
+    description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
+  },
+   {
+    _id: '43564564778797890809',
+    title:'Join the Mission of Spreading God\'s Love',
+    description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
+  },
+  {
+    _id: '43564564778797890809',
     title:'Join the Mission of Spreading God\'s Love',
     description:'Become a partner in sharing the gospel through music. Whether through prayer, financial support, or simply sharing the message, you can help spread the transformative power of worship to people around the world.'
   }

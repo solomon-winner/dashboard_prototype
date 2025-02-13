@@ -112,78 +112,52 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
 
     </div>
 
-    <div className="w-full h-auto flex justify-center max-w-full box-border">
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
-            { isCardInfoEditing ? (
-                <form onSubmit={handleSubmit} className='w-full h-full'>
-                <textarea 
-                value={CardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="border p-2 w-full">
-                </textarea>
-                <textarea 
-                value={CardInfo}
-                onChange={handleCardInfoChange}
-                className="border p-2 w-full h-full">
-                </textarea>
-                
-                <button type='submit' className="mt-2 p-2 bg-blue-500 text-white">
-                        Save
-                    </button>
-                
-                </form>):(
-                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
-                    {CardTitle}
-                </div>
-                <div className="text-lg text-green-900 p-2">
-                    {CardInfo}
-                </div></>)}
-            </div>
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
-            { isCardInfoEditing?(
-                <>
-                <textarea 
-                value={CardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="border p-2 w-full">
-                </textarea>
-                <textarea 
-                value={CardInfo}
-                onChange={handleCardInfoChange}
-                className="border p-2 w-full h-full">
-                </textarea>
-                
-                </>):(
-                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
-                    {CardTitle}
-                </div>
-                <div className="text-lg text-green-900 p-2">
-                    {CardInfo}
-                </div></>)}
-            </div>
-            <div className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={handleCardInfoClick}>
-            { isCardInfoEditing?(
-                <>
-                <textarea 
-                value={CardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="border p-2 w-full">
-                </textarea>
-                <textarea 
-                value={CardInfo}
-                onChange={handleCardInfoChange}
-                className="border p-2 w-full h-full">
-                </textarea>
-                
-                </>):(
-                    <><div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
-                    {CardTitle}
-                </div>
-                <div className="text-lg text-green-900 p-2">
-                    {CardInfo}
-                </div></>)}
-            </div>
-        </div>
+<div className="w-full h-auto flex justify-center max-w-full box-border">
+  {CardInfo.map((card, index) => (
+    <div
+      key={card._id || index} // Use _id if available; otherwise, fallback to index
+      className="w-[30%] h-auto m-0 mx-1 bg-white"
+      onClick={handleCardInfoClick}
+    >
+      {isCardInfoEditing ? (
+        <form onSubmit={handleSubmit} className="w-full h-full">
+          <textarea
+            value={card.title}
+            onChange={(e) => {
+              const updatedCards = [...CardInfo];
+              updatedCards[index].title = e.target.value;
+              setCardInfo(updatedCards);
+            }}
+            className="border p-2 w-full"
+          ></textarea>
+          <textarea
+            value={card.description}
+            onChange={(e) => {
+              const updatedCards = [...CardInfo];
+              updatedCards[index].description = e.target.value;
+              setCardInfo(updatedCards);
+            }}
+            className="border p-2 w-full h-full"
+          ></textarea>
+
+          <button type="submit" className="mt-2 p-2 bg-blue-500 text-white">
+            Save
+          </button>
+        </form>
+      ) : (
+        <>
+          <div className="text-lg font-bold text-green-900 m-2 border-b border-green-900">
+            {card.title}
+          </div>
+          <div className="text-lg text-green-900 p-2">
+            {card.description}
+          </div>
+        </>
+      )}
+    </div>
+  ))}
+</div>
+
 
         <div className="mt-32 w-full flex justify-center items-center gap-[10%] h-auto">
       <div className="w-2/5 h-[500px] bg-white bg-cover bg-center"></div>
