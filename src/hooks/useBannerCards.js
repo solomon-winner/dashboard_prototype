@@ -2,8 +2,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchBannerCards, createBannerCard, updateBannerCard, deleteBannerCard } from '../utils/api.js';
 
 export const useBannerCards = () => {
-  return useQuery('bannerCards', fetchBannerCards);
+  return useQuery({
+    queryKey: ["bannerCards"], 
+    queryFn: fetchBannerCards,
+  });
 };
+
 
 export const useCreateBannerCard = () => {
   const queryClient = useQueryClient();

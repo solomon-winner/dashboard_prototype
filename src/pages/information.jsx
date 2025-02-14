@@ -10,7 +10,7 @@ import {
   } from '../state/state';
 import { useRecoilState } from 'recoil';
 import { useUpdateGeneralInfo,  } from '../hooks/useGeneralInfo';
-import { useUpdateBannerCard } from '../hooks/useBannerCards.js';
+import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
 
  const Information = () => {
     const [isBannerInfoEditing, setIsBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
@@ -22,6 +22,8 @@ import { useUpdateBannerCard } from '../hooks/useBannerCards.js';
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const updateGeneralInfo = useUpdateGeneralInfo();
     const updateBannerCard = useUpdateBannerCard();
+    const BannerCards = useBannerCards();
+    console.log("--=-=-=-=-=->>>",BannerCards);
 
     const handleBannerDivClick = () => {
         setIsBannerInfoEditing(true);
@@ -67,7 +69,6 @@ import { useUpdateBannerCard } from '../hooks/useBannerCards.js';
             bannerInfo: content,
             aboutInfo: companyInfo
         }
-      console.log("Form_data:",formData)
       updateGeneralInfo.mutate(formData);
       setIsBannerInfoEditing(false);
       setEditingCardId(null);

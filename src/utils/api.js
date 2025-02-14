@@ -53,21 +53,22 @@ export const updateGeneralInfo = async (data) => {
   }
 };
 
-export const deleteGeneralInfo = async (id) => {
-  try {
-    const response = await apiClient.delete(`/general/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error);
-    throw error;
-  }
-};
+// export const deleteGeneralInfo = async (id) => {
+//   try {
+//     const response = await apiClient.delete(`/general/${id}`);
+//     return response.data;
+//   } catch (error) {
+//     handleError(error);
+//     throw error;
+//   }
+// };
 
 // Banner Cards
 export const fetchBannerCards = async () => {
   try {
     const response = await apiClient.get('/bannercards');
-    return response.data;
+    console.log("This is from the api...-=-=-=>",response.data.data);
+    return response.data.data;
   } catch (error) {
     handleError(error);
     throw error;
