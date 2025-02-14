@@ -5,12 +5,12 @@ import {
     contentState,
     companyInfoState,
     cardInfoState,
-    cardTitleState,
     isEditingBannerInfoState,
     editingCardIdState,
   } from '../state/state';
 import { useRecoilState } from 'recoil';
-import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
+import { useUpdateGeneralInfo,  } from '../hooks/useGeneralInfo';
+import { useUpdateBannerCard } from '../hooks/useBannerCards.js';
 
  const Information = () => {
     const [isBannerInfoEditing, setIsBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
@@ -21,6 +21,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const updateGeneralInfo = useUpdateGeneralInfo();
+    const updateBannerCard = useUpdateBannerCard();
 
     const handleBannerDivClick = () => {
         setIsBannerInfoEditing(true);
@@ -30,7 +31,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
     const handleCardInfoClick = (_id) => {
         setEditingCardId(_id);
         setIsBannerInfoEditing(false);
-        setIsEditingCompanyInfo(false); // Set the _id of the clicked card
+        setIsEditingCompanyInfo(false);
     };
 
     const handleAboutInfoClick = () => {
@@ -72,9 +73,21 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
       setEditingCardId(null);
       setIsEditingCompanyInfo(false);
     }
+
     const handleCardInfoSave = () => {
+        if (!editingCardId) return; 
+        
+        const updatedCard = CardInfo.find(card => card._id === editingCardId);
+        
+        if (updatedCard) {
+            console.log("Updated Card:", updatedCard);
+        }
+        
+        updateBannerCard.mutate(updatedCard);
         setEditingCardId(null);
+        console.log(updatedCard);
     };
+
     return (
         <div className="ml-[15rem] bg-white-100 min-h-screen ">
             <div className="flex flex-col justify-between gap-10% items-center">
@@ -125,6 +138,7 @@ import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
                                 onChange={(e) => handleCardInfoChange(card._id, "title", e.target.value)}
                                 className="border p-2 w-full"
                             ></textarea>
+
                             <textarea
                                 value={card.description}
                                 onChange={(e) => handleCardInfoChange(card._id, "description", e.target.value)}
