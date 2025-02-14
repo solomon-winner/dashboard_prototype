@@ -78,12 +78,8 @@ import { useUpdateBannerCard } from '../hooks/useBannerCards.js';
         if (!editingCardId) return; 
         
         const updatedCard = CardInfo.find(card => card._id === editingCardId);
-        
-        if (updatedCard) {
-            console.log("Updated Card:", updatedCard);
-        }
-        
-        updateBannerCard.mutate(updatedCard);
+
+        updateBannerCard.mutate({ _id: editingCardId, data: updatedCard });
         setEditingCardId(null);
         console.log(updatedCard);
     };

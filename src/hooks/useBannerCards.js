@@ -14,9 +14,11 @@ export const useCreateBannerCard = () => {
   });
 };
 
-export const useUpdateBannerCard = (id) => {
+export const useUpdateBannerCard = () => {
   const queryClient = useQueryClient();
-  return useMutation((data) => updateBannerCard(id, data), {
+
+  return useMutation({
+    mutationFn: (_id, data) => updateBannerCard(_id, data),
     onSuccess: () => {
       queryClient.invalidateQueries('bannerCards');
     },
