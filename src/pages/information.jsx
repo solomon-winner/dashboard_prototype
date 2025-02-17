@@ -23,7 +23,6 @@ import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
     const updateGeneralInfo = useUpdateGeneralInfo();
     const updateBannerCard = useUpdateBannerCard();
     const { isLoading, error } = useBannerCards();
-    const BannerCards = useRecoilValue(cardInfoState);
    
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
