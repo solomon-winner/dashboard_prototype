@@ -45,7 +45,7 @@ export const useUpdateBannerCard = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (_id, data) => updateBannerCard(_id, data),
+    mutationFn: ({id, data}) => updateBannerCard(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries('bannerCards');
     },

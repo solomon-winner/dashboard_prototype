@@ -8,7 +8,7 @@ import {
     isEditingBannerInfoState,
     editingCardIdState,
   } from '../state/state';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useUpdateGeneralInfo,  } from '../hooks/useGeneralInfo';
 import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
 
@@ -22,16 +22,20 @@ import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const updateGeneralInfo = useUpdateGeneralInfo();
     const updateBannerCard = useUpdateBannerCard();
-    const BannerCards = useBannerCards();
-    console.log("--=-=-=-=-=->>>",BannerCards);
+    const { isLoading, error } = useBannerCards();
+    const BannerCards = useRecoilValue(cardInfoState);
+   
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+  
 
     const handleBannerDivClick = () => {
         setIsBannerInfoEditing(true);
         setEditingCardId(null);
         setIsEditingCompanyInfo(false);
     };
-    const handleCardInfoClick = (_id) => {
-        setEditingCardId(_id);
+    const handleCardInfoClick = (id) => {
+        setEditingCardId(id);
         setIsBannerInfoEditing(false);
         setIsEditingCompanyInfo(false);
     };
@@ -50,10 +54,10 @@ import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
         setContent(e.target.value);
     };
 
-    const handleCardInfoChange = (_id, field, value) => {
+    const handleCardInfoChange = (id, field, value) => {
         setCardInfo((prevCards) =>
             prevCards.map((card) =>
-                card._id === _id ? { ...card, [field]: value } : card
+                card.id === id ? { ...card, [field]: value } : card
             )
         );
     };
@@ -78,9 +82,9 @@ import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
     const handleCardInfoSave = () => {
         if (!editingCardId) return; 
         
-        const updatedCard = CardInfo.find(card => card._id === editingCardId);
+        const updatedCard = CardInfo.find(card => card.id === editingCardId);
 
-        updateBannerCard.mutate({ _id: editingCardId, data: updatedCard });
+        updateBannerCard.mutate({ id: editingCardId, data: updatedCard });
         setEditingCardId(null);
         console.log(updatedCard);
     };
@@ -127,18 +131,18 @@ import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
 
     <div className="w-full h-auto flex justify-center max-w-full box-border">
             {CardInfo.map((card) => (
-                    <div key={card._id} className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={() => handleCardInfoClick(card._id)}>
-                    {editingCardId === card._id ? (
+                    <div key={card.id} className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={() => handleCardInfoClick(card.id)}>
+                    {editingCardId === card.id ? (
                         <form onSubmit={(e) => { e.preventDefault(); handleCardInfoSave(); }} className="w-full h-full">
                             <textarea
                                 value={card.title}
-                                onChange={(e) => handleCardInfoChange(card._id, "title", e.target.value)}
+                                onChange={(e) => handleCardInfoChange(card.id, "title", e.target.value)}
                                 className="border p-2 w-full"
                             ></textarea>
 
                             <textarea
                                 value={card.description}
-                                onChange={(e) => handleCardInfoChange(card._id, "description", e.target.value)}
+                                onChange={(e) => handleCardInfoChange(card.id, "description", e.target.value)}
                                 className="border p-2 w-full h-full"
                             ></textarea>
                             <button type="submit" className="mt-2 p-2 bg-blue-500 text-white">

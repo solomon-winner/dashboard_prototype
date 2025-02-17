@@ -87,7 +87,7 @@ export const createBannerCard = async (data) => {
 
 export const updateBannerCard = async (_id, data) => {
   try {
-    console.log("this is from api--->",_id, data);
+    console.log("this is from updateBannerCard api--->","id:",data, "data:",_id);
     const response = await apiClient.put(`/bannercards/${_id}`, data);
     return response.data;
   } catch (error) {
