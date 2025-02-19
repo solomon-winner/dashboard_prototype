@@ -10,8 +10,8 @@ export const useSongs = () => {
   const setSongs = useSetRecoilState(songsState);
 
   const { data, isError, isLoading, error } = useQuery({
-    queryKey: ['songs'],
-    queryFn: fetchSongs,
+    queryKey: ['songs',type],
+    queryFn: () => fetchSongs(type),
     staleTime: 5 * 60 * 1000,  // Cache data for 5 minutes
     refetchOnWindowFocus: false,  // Prevent unnecessary refetch on window focus
     retry: 2,  // Retry twice on failure

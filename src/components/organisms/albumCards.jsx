@@ -3,13 +3,26 @@ import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
-import { useAddSong } from "../../hooks/useSongs.js";
+import { useAddSong, useSongs } from "../../hooks/useSongs.js";
+import { songsState ,albumsState} from "../../state/state.js";
+import { useRecoilState } from "recoil";
 
 const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
+  const [Songs, setSongs] = useRecoilState(songsState);
+  const [Albums, setAlbums] = useRecoilState(albumsState);
 
+  const { isLoading: isSongLoading, isError: songError, data: songs } = useSongs("song");
+const { isLoading: isAlbumLoading, isError: albumError, data: albums } = useSongs("album");
+
+console.log("@@@@@ Songs:", Songs);
+console.log("@@@@@ Albums:", Albums);
+
+if (isSongLoading || isAlbumLoading) return <div>Loading...</div>;
+if (songError) return <div>Error fetching songs: {songError.message}</div>;
+if (albumError) return <div>Error fetching albums: {albumError.message}</div>;
   const openPopup = (type) => {
     setFormType(type);
     setIsOpen(true);
@@ -45,6 +58,7 @@ const Albums = () => {
         )}
             </div>
             </div>
+            
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
                 <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">

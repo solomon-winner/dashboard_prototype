@@ -45,6 +45,11 @@ export const songsState = atom({
   default: [],
 });
 
+export const albumsState = atom({
+  key: 'albumsState',
+  default: [],
+});
+
 export const testimoniesState = atom({
   key: 'testimoniesState',
   default: [],

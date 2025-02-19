@@ -8,7 +8,7 @@ import {
     isEditingBannerInfoState,
     editingCardIdState,
   } from '../state/state';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useUpdateGeneralInfo,  } from '../hooks/useGeneralInfo';
 import { useBannerCards,useUpdateBannerCard } from '../hooks/useBannerCards.js';
 
