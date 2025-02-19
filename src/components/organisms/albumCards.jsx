@@ -14,7 +14,7 @@ const Albums = () => {
   const [Songs, setSongs] = useRecoilState(songsState);
   const [Albums, setAlbums] = useRecoilState(albumsState);
 
-  const { isLoading: isSongLoading, isError: songError, data: songs } = useSongs("song");
+const { isLoading: isSongLoading, isError: songError, data: songs } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError, data: albums } = useSongs("album");
 
 console.log("@@@@@ Songs:", Songs);
@@ -23,7 +23,8 @@ console.log("@@@@@ Albums:", Albums);
 if (isSongLoading || isAlbumLoading) return <div>Loading...</div>;
 if (songError) return <div>Error fetching songs: {songError.message}</div>;
 if (albumError) return <div>Error fetching albums: {albumError.message}</div>;
-  const openPopup = (type) => {
+  
+const openPopup = (type) => {
     setFormType(type);
     setIsOpen(true);
   };  
@@ -34,13 +35,16 @@ if (albumError) return <div>Error fetching albums: {albumError.message}</div>;
     event.preventDefault();
 
       const formElement = event.target;
-    
+
       if (formElement.enctype === "multipart/form-data") {
         const formData = new FormData(formElement);
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}:`, value); 
-        }
+        // for (const [key, value] of formData.entries()) {
+        //   console.log(`${key}:`, value); 
+        // }
+        formData.append("type", formType);
 
+        console.log("Submitting:", formType, formData);
+    
     addSong.mutate(formData);
     event.target.reset();
     closePopup();
