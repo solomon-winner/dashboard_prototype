@@ -100,20 +100,21 @@ const openPopup = (type) => {
     closePopup();
   }
 };
+
 const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result); // Set the preview URL
+        setImagePreview(reader.result); 
       };
       reader.readAsDataURL(file);
     }
   };
   const handleAddSong = () => {
-    setSongs([...songs, '']); // Add an empty song to the list
-  };
+    setSongs([...songs, '']); 
+};
 
 
     return (
@@ -130,7 +131,7 @@ const handleImageChange = (e) => {
             
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
-                {Albums.data.map((album) => (
+                {/* {Albums.data.map((album) => (
                 <div key={album.id} className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                 <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
                     <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: `url(${album.img})` }}>
@@ -153,7 +154,7 @@ const handleImageChange = (e) => {
                     <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                 </div>
             </div>   
-                       ))}
+                       ))} */}
                     
                     <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
       <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
@@ -164,7 +165,7 @@ const handleImageChange = (e) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="mb-4"
+                className="mb-4 ml-[75px]"
               />
               <img
                 src={imagePreview}
