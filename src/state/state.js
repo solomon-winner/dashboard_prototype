@@ -15,6 +15,16 @@ export const editingCardIdState = atom({
   default: null,
 });
 
+export const editingAlbumIdState = atom({
+  key: 'editingAlbumIdState',
+  default: null,
+});
+
+export const editingSongIdState = atom({
+  key: 'editingSongIdState',
+  default: null,
+});
+
 export const titleState = atom({
   key: 'titleState',
   default: 'Psalms 95: 1-6',

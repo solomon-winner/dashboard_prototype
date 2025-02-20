@@ -3,8 +3,8 @@ import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
-import { useAddSong, useSongs } from "../../hooks/useSongs.js";
-import { songsState ,albumsState} from "../../state/state.js";
+import { useAddSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
+import { songsState ,albumsState, editingAlbumIdState} from "../../state/state.js";
 import { useRecoilState } from "recoil";
 
 const Albums = () => {
@@ -13,11 +13,12 @@ const Albums = () => {
   const addSong = useAddSong();
  // const [Songs, setSongs] = useRecoilState(songsState);
   const [Albums, setAlbums] = useRecoilState(albumsState);
-
+  const  updateSong  = useUpdateSong(); 
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError, data: albums } = useSongs("album");
 const [isEditing, setIsEditing] = useState(false);
 const [albumTitle, setAlbumTitle] = useState('Balewletaye (ባለውለታየ)');
+const [editingAlbumId, setEditingAlbumId] = useRecoilState(editingAlbumIdState);
 
 const [songs, setSongs] = useState([
   'Wletew Bezabgn',
@@ -34,6 +35,7 @@ const [songs, setSongs] = useState([
   'Wletew Bezabgn',
   'Eski Meskelh sr',
 ]);
+
 const [imageUrl, setImageUrl] = useState('https://via.placeholder.com/300');
 const [imageFile, setImageFile] = useState(null);
 const [imagePreview, setImagePreview] = useState('https://via.placeholder.com/300'); 
@@ -49,17 +51,24 @@ const handleUpdate = () => {
 };
 
 const handleSave = () => {
-    const filteredSongs = songs.filter(song => song.trim() !== "");
-
-    // Filter out empty links
-    const filteredLinks = Object.fromEntries(
-      Object.entries(links).filter(([_, value]) => value.trim() !== "")
-    );
-  
-    setSongs(filteredSongs);  // Update songs state without empty ones
-    setLinks(filteredLinks);  // Update links state without empty ones
     setIsEditing(false);
-};
+
+    // Filter out empty songs
+    const filteredSongs = songs.filter((song) => song.trim() !== '');
+
+    // Prepare the data to send to the server
+    const data = {
+      albumTitle,
+      songs: filteredSongs,
+      image: imageFile, // Assuming the server can handle File objects
+      links,
+    };
+    // const updatedAlbum = albums.find(album => album.id === editingAlbumIdState);
+
+    // Send the data to the server using the mutation
+    updateSong.mutate({ id: editingAlbumId , data });
+  };
+
 
 const handleCancel = () => {
   setIsEditing(false);
