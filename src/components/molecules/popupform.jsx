@@ -1,53 +1,87 @@
 import { useState } from "react";
 import FormField from "../atoms/FormField.jsx";
+import { useAddSong } from "../../hooks/useSongs.js";
 
 export default function PopupForm({ closePopup, onSubmit, formType }) {
   
-  const [formData, setFormData] = useState({
+  const [formValue, setFormValue] = useState({
     img: '',
     title: '',
-    img: '',
-    link: '',
     youtubeLink: '',
     appleMusicLink: '',
     spotifyLink: '',
     amazonLink: '',
-    songs: [''],
+    songs: [],
   });
+  const addSong = useAddSong();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormValue((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSongChange = (index, value) => {
-    const updatedSongs = [...formData.songs];
-    updatedSongs[index] = value;
-    setFormData((prevData) => ({
-      ...prevData,
-      songs: updatedSongs,
-    }));
+  const handleSongChange = (index, e) => {
+    const { value } = e.target;
+    setFormValue((prevData) => {
+      const updatedSongs = [...prevData.songs];
+      updatedSongs[index] = value; 
+      return { ...prevData, songs: updatedSongs };
+    });
   };
 
   const handleAddSong = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      songs: [...prevData.songs, ''],
-    }));
+    setFormValue((prevData) => {
+      const updatedSongs = [...prevData.songs, ''];
+      console.log("Songs before update:", prevData.songs); // This logs the previous state
+      console.log("Songs after update:", updatedSongs); // This logs the new state before updating
+      return { ...prevData, songs: updatedSongs };
+    });
   };
+  
 
   const handleRemoveSong = (index) => {
-    if (formData.songs.length > 1) {
-      const updatedSongs = formData.songs.filter((_, i) => i !== index);
-      setFormData((prevData) => ({
+    if (formValue.songs.length > 1) {
+      const updatedSongs = formValue.songs.filter((_, i) => i !== index);
+      setFormValue((prevData) => ({
         ...prevData,
         songs: updatedSongs,
       }));
     }
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    formData.append("type", formType);
+  
+    // Append each song individually
+    formValue.songs.forEach((song, index) => {
+      formData.append(`songs[${index}]`, song);
+    });
+  
+    // Debugging: Log form data before submitting
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+  
+    addSong.mutate(formData);
+  
+    setFormValue({
+      img: '',
+      title: '',
+      youtubeLink: '',
+      appleMusicLink: '',
+      spotifyLink: '',
+      amazonLink: '',
+      songs: [],
+    });
+  
+    closePopup();
+  };
+  
 
   return (
     <div
@@ -64,7 +98,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
           {formType === 'album' ? 'Add New Album' : 'Add New Song'}
         </h2>
-        <form onSubmit={onSubmit} className="space-y-4" encType="multipart/form-data">
+        <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
           {formType === 'album' ? (
             <>
 
@@ -75,7 +109,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
                 type="file" 
                 required 
                 isImageField 
-                value={formData.img}
+                value={formValue.img}
                 onChange={handleChange}
                 />
               </div>
@@ -86,7 +120,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               name="title" 
               type="text" 
               required 
-              value={formData.albumTitle}
+              value={formValue.albumTitle}
               onChange={handleChange}
               />
               </div>
@@ -98,7 +132,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
                name = {link} 
                type="url" 
                required
-               value={formData[link]}
+               value={formValue[link]}
                onChange={handleChange}
                />         
                 </div>
@@ -106,15 +140,16 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
 
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Album Songs</label>
-                {formData.songs.map((song, index) => (
+                {formValue.songs.map((song, index) => (
                   <div key={index} className="flex items-center gap-2 mb-2">
-                    <FormField
-                      type="text"
-                      value={song}
-                      onChange={(e) => handleSongChange(index, e.target.value)}
-                      placeholder="Song Title"
-                      required
-                    />
+                      <FormField
+                        type="text"
+                        value={formValue.songs[index] || ''}
+                        onChange={(e) => handleSongChange(index, e)} // Pass the index here
+                        placeholder="Song Title"
+                        required
+                      />
+
                     <button
                       type="button"
                       className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600"
@@ -143,7 +178,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               type="file" 
               required 
               isImageField
-              value={formData.img}
+              value={formValue.img}
               onChange={handleChange}
               />
               <FormField 
@@ -151,7 +186,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               name="title" 
               type="text" 
               required 
-              value={formData.title}
+              value={formValue.title}
               onChange={handleChange}
               />
               <FormField 
@@ -159,7 +194,7 @@ export default function PopupForm({ closePopup, onSubmit, formType }) {
               name="youtubeLink" 
               type="url" 
               required 
-              value={formData.youtubeLink}
+              value={formValue.youtubeLink}
               onChange={handleChange}
               />
             </>

@@ -65,7 +65,6 @@ const handleSave = () => {
     };
     // const updatedAlbum = albums.find(album => album.id === editingAlbumIdState);
 
-    // Send the data to the server using the mutation
     updateSong.mutate({ id: editingAlbumId , data });
   };
 
@@ -103,6 +102,10 @@ const openPopup = (type) => {
       if (formElement.enctype === "multipart/form-data") {
         const formData = new FormData(formElement);
         formData.append("type", formType); 
+        
+        formData.forEach((value, key) => {
+          console.log(`${key}: ${value}`);
+      });
 
     addSong.mutate(formData);
     event.target.reset();

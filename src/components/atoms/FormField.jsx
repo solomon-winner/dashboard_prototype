@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function FormField({ label, name, type, required, isImageField }) {
+export default function FormField({ label, name, type, required, isImageField, value, onChange }) {
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
@@ -16,9 +16,7 @@ export default function FormField({ label, name, type, required, isImageField })
 
   return (
     <div>
-      <label className="block mb-2 text-gray-700 font-medium">
-        {label}
-      </label>
+      <label className="block mb-2 text-gray-700 font-medium">{label}</label>
       {isImageField ? (
         <div className="w-full h-48 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg cursor-pointer relative overflow-hidden">
           <input
@@ -39,6 +37,8 @@ export default function FormField({ label, name, type, required, isImageField })
         <input
           type={type}
           name={name}
+          value={value} // 🔥 Ensure it is controlled
+          onChange={onChange} // 🔥 Pass down the onChange handler
           required={required}
           className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
