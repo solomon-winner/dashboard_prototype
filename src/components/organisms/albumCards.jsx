@@ -66,7 +66,7 @@ const handleSave = () => {
       links,
     };
 
-    updateSong.mutate({ id: editingAlbum , data });
+    updateSong.mutate({ id: editingAlbum.id , data });
     setEditingAlbum(null);
   };
 
@@ -76,30 +76,23 @@ const handleCancel = () => {
 };
 
 const handleSongChange = (index, value) => {
+  // Create a new copy of the songs array with the updated value
   const newSongs = [...editingAlbum.songs];
   newSongs[index] = value;
-  console.log("newSongs",newSongs)
-  // setSongs(newSongs);
 
+  // Update the editingAlbum state immutably
+  setEditingAlbum((prevAlbum) => ({
+    ...prevAlbum, // Copy all existing properties
+    songs: newSongs, // Update the songs array
+  }));
 };
 
 const handleLinkChange = (key, value) => {
-    switch (key) {
-      case 'youtubeLink':
-        editingAlbum.youtubeLink = value
-        break;
-      case 'appleMusicLink':
-        editingAlbum.appleMusicLink = value
-
-        break;
-      case 'spotifyLink':
-        editingAlbum.spotifyLink = value
-
-        break;
-      case 'amazonLink':
-        editingAlbum.amazonLink = value
-        break;
-    }
+  setEditingAlbum((prevAlbum) => ({
+    ...prevAlbum,
+    [key]: value,
+  }));
+  console.log("handleLinkChange",editingAlbum)
 };
 
 if (isSongLoading || isAlbumLoading) return <div>Loading...</div>;
@@ -144,8 +137,12 @@ const handleImageChange = (e) => {
     }
   };
   const handleAddSong = () => {
-    setSongs([...songs, '']); 
-};
+    // Update the editingAlbum state immutably
+    setEditingAlbum((prevAlbum) => ({
+      ...prevAlbum, // Copy all existing properties
+      songs: [...prevAlbum.songs, ""], // Add a new empty song to the songs array
+    }));
+  };
 
 
     return (
@@ -197,28 +194,28 @@ const handleImageChange = (e) => {
           <>
             <input
               type="text"
-              value={albums.appleMusicLink}
+              value={editingAlbum.appleMusicLink}
               onChange={(e) => handleLinkChange('appleMusicLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Apple Music Link"
             />
             <input
               type="text"
-              value={albums.spotifyLink}
+              value={editingAlbum.spotifyLink}
               onChange={(e) => handleLinkChange('spotifyLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Spotify Link"
             />
             <input
               type="text"
-              value={albums.amazonLink}
+              value={editingAlbum.amazonLink}
               onChange={(e) => handleLinkChange('amazonLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Amazon Link"
             />
             <input
               type="text"
-              value={albums.youtubeLink}
+              value={editingAlbum.youtubeLink}
               onChange={(e) => handleLinkChange('youtubeLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="YouTube Link"
@@ -245,7 +242,7 @@ const handleImageChange = (e) => {
                 {editingAlbum?.id === album.id ? (
           <input
             type="text"
-            value={albumTitle}
+            value={editingAlbum.title}
             onChange={(e) => setAlbumTitle(e.target.value)}
             className="text-2xl font-bold text-green-600 w-full mb-2"
           />
