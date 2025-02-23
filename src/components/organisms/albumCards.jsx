@@ -84,7 +84,22 @@ const handleSongChange = (index, value) => {
 };
 
 const handleLinkChange = (key, value) => {
-  setLinks({ ...links, [key]: value });
+    switch (key) {
+      case 'youtubeLink':
+        editingAlbum.youtubeLink = value
+        break;
+      case 'appleMusicLink':
+        editingAlbum.appleMusicLink = value
+
+        break;
+      case 'spotifyLink':
+        editingAlbum.spotifyLink = value
+
+        break;
+      case 'amazonLink':
+        editingAlbum.amazonLink = value
+        break;
+    }
 };
 
 if (isSongLoading || isAlbumLoading) return <div>Loading...</div>;
@@ -182,29 +197,29 @@ const handleImageChange = (e) => {
           <>
             <input
               type="text"
-              value={links.appleMusic}
-              onChange={(e) => handleLinkChange('appleMusic', e.target.value)}
+              value={albums.appleMusicLink}
+              onChange={(e) => handleLinkChange('appleMusicLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Apple Music Link"
             />
             <input
               type="text"
-              value={links.spotify}
-              onChange={(e) => handleLinkChange('spotify', e.target.value)}
+              value={albums.spotifyLink}
+              onChange={(e) => handleLinkChange('spotifyLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Spotify Link"
             />
             <input
               type="text"
-              value={links.amazon}
-              onChange={(e) => handleLinkChange('amazon', e.target.value)}
+              value={albums.amazonLink}
+              onChange={(e) => handleLinkChange('amazonLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Amazon Link"
             />
             <input
               type="text"
-              value={links.youtube}
-              onChange={(e) => handleLinkChange('youtube', e.target.value)}
+              value={albums.youtubeLink}
+              onChange={(e) => handleLinkChange('youtubeLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="YouTube Link"
             />
@@ -311,7 +326,7 @@ const handleImageChange = (e) => {
           <>
             <input
               type="text"
-              value={links.appleMusic}
+              value={amazonLink.appleMusic}
               onChange={(e) => handleLinkChange('appleMusic', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Apple Music Link"
