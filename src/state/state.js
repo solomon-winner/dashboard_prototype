@@ -15,8 +15,8 @@ export const editingCardIdState = atom({
   default: null,
 });
 
-export const editingAlbumIdState = atom({
-  key: 'editingAlbumIdState',
+export const editingAlbumState = atom({
+  key: 'editingAlbumState',
   default: null,
 });
 

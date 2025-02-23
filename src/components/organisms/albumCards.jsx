@@ -4,7 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
 import { useAddSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
-import { songsState ,albumsState, editingAlbumIdState} from "../../state/state.js";
+import { songsState ,albumsState, editingAlbumState} from "../../state/state.js";
 import { useRecoilState } from "recoil";
 
 const Albums = () => {
@@ -18,8 +18,8 @@ const { isLoading: isSongLoading, isError: songError } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError, data: albums } = useSongs("album");
 const [isEditing, setIsEditing] = useState(false);
 const [albumTitle, setAlbumTitle] = useState('Balewletaye (ባለውለታየ)');
-const [editingAlbumId, setEditingAlbumId] = useRecoilState(editingAlbumIdState);
-
+const [editingAlbum, setEditingAlbum] = useRecoilState(editingAlbumState);
+console.log("Albums",Albums)
 const [songs, setSongs] = useState([
   'Wletew Bezabgn',
   'Zariem hyaw new',
@@ -46,16 +46,18 @@ const [links, setLinks] = useState({
   youtube: 'https://youtube.com',
 });
 
-const handleUpdate = () => {
-  setIsEditing(true);
+const handleUpdate = (id) => {
+  const updatedAlbum = Albums.find(album => album.id === id);
+  setEditingAlbum(updatedAlbum);
 };
 
 const handleSave = () => {
-    setIsEditing(false);
-
+  setEditingAlbum(null);
+    console.log("Editing Album:",editingAlbum)
     // Filter out empty songs
-    const filteredSongs = songs.filter((song) => song.trim() !== '');
-
+    const filteredSongs = editingAlbum.songs.filter((song) => song.trim() !== '');
+    //const updatedAlbum = Albums.find(album => album.id === editingAlbum.id);
+    console.log("updatedAlbum",editingAlbum)
     // Prepare the data to send to the server
     const data = {
       albumTitle,
@@ -63,20 +65,22 @@ const handleSave = () => {
       image: imageFile, // Assuming the server can handle File objects
       links,
     };
-    // const updatedAlbum = albums.find(album => album.id === editingAlbumIdState);
 
-    updateSong.mutate({ id: editingAlbumId , data });
+    updateSong.mutate({ id: editingAlbum , data });
+    setEditingAlbum(null);
   };
 
 
 const handleCancel = () => {
-  setIsEditing(false);
+  setEditingAlbum(null);
 };
 
 const handleSongChange = (index, value) => {
-  const newSongs = [...songs];
+  const newSongs = [...editingAlbum.songs];
   newSongs[index] = value;
-  setSongs(newSongs);
+  console.log("newSongs",newSongs)
+  // setSongs(newSongs);
+
 };
 
 const handleLinkChange = (key, value) => {
@@ -143,31 +147,136 @@ const handleImageChange = (e) => {
             
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
-                {albums.data.map((album) => (
+                {Albums.map((album) => (
                 <div key={album.id} className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                 <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
-                    <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: `url(${album.img})` }}>
-                    <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                    <IoMdAdd className="cursor-pointer" title="Add a song to this Album"/>
-                    <MdOutlineUpdate className="cursor-pointer" title="Update this Album"/>
-                    <MdDeleteOutline className="cursor-pointer" title="Delete this Album"/>
-                    </div>
-                    </div>
-                    <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaApple />Buy on Apple Music</button>
-                    <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaSpotify />Listen on Spotify</button>
-                    <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaAmazon />Buy on Amazon</button>
-                    <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700"><FaYoutube />Watch on YouTube</button>
+                {editingAlbum?.id === album.id ? (
+          <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end">
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="mb-4 ml-[75px]"
+              />
+              <img
+                src={imagePreview}
+                alt="Album Cover Preview"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        ) : (
+          <div
+            className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end"
+            style={{ backgroundImage: `url(${imagePreview})` }}
+          >
+            <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+              <IoMdAdd className="cursor-pointer" title="Add a song to this Album" />
+              <MdOutlineUpdate className="cursor-pointer" title="Update this Album" onClick={() =>handleUpdate(album.id)} />
+              <MdDeleteOutline className="cursor-pointer" title="Delete this Album" />
+            </div>
+          </div>
+        )}
+        {editingAlbum?.id === album.id ? (
+          <>
+            <input
+              type="text"
+              value={links.appleMusic}
+              onChange={(e) => handleLinkChange('appleMusic', e.target.value)}
+              className="w-full h-12 p-2 border border-green-600"
+              placeholder="Apple Music Link"
+            />
+            <input
+              type="text"
+              value={links.spotify}
+              onChange={(e) => handleLinkChange('spotify', e.target.value)}
+              className="w-full h-12 p-2 border border-green-600"
+              placeholder="Spotify Link"
+            />
+            <input
+              type="text"
+              value={links.amazon}
+              onChange={(e) => handleLinkChange('amazon', e.target.value)}
+              className="w-full h-12 p-2 border border-green-600"
+              placeholder="Amazon Link"
+            />
+            <input
+              type="text"
+              value={links.youtube}
+              onChange={(e) => handleLinkChange('youtube', e.target.value)}
+              className="w-full h-12 p-2 border border-green-600"
+              placeholder="YouTube Link"
+            />
+          </>
+        ) : (
+          <>
+            <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
+              <FaApple />Buy on Apple Music
+            </button>
+            <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
+              <FaSpotify />Listen on Spotify
+            </button>
+            <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
+              <FaAmazon />Buy on Amazon
+            </button>
+            <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
+              <FaYoutube />Watch on YouTube
+            </button>
+          </>
+        )}
                 </div>
                 <div className="w-3/5 h-full flex flex-col justify-center items-start box-border">
+                {editingAlbum?.id === album.id ? (
+          <input
+            type="text"
+            value={albumTitle}
+            onChange={(e) => setAlbumTitle(e.target.value)}
+            className="text-2xl font-bold text-green-600 w-full mb-2"
+          />
+        ) : (
                     <div className="text-2xl font-bold text-green-600 w-full mb-2">{album.title}</div>
-                    {album.songs.map((song) => (
+        )}
+                    {album.songs.map((song, index) => 
+                              editingAlbum?.id === album.id ? (
+                                <input
+                                  key={index}
+                                  type="text"
+                                  value={song}
+                                  onChange={(e) => handleSongChange(index, e.target.value)}
+                                  className="text-green-600 w-full m-0 p-1 box-border"
+                                />
+                              ) : (
                      <p className="text-green-600 w-full m-0 p-1 box-border">{song}</p>
-                    ) )}
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
+                              )
+                     )}
+        {editingAlbum?.id === album.id && (
+          <button
+            onClick={handleAddSong}
+            className="absolute bottom-0 right-0 p-2 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700"
+            title="Add a new song"
+          >
+            <IoMdAdd size={20} />
+          </button>
+        )}
+        {editingAlbum?.id === album.id ? (
+          <div className="flex gap-2 mt-2">
+            <button onClick={handleSave} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+              Save
+            </button>
+            <button onClick={handleCancel} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white">
+            <FaYoutube />Play the song
+          </button>
+        )}
+          </div>
             </div>   
                        ))}
-                    
+{/*                     
                     <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
       <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
         {isEditing ? (
@@ -296,9 +405,9 @@ const handleImageChange = (e) => {
           </button>
         )}
       </div>
-    </div>
+    </div> */}
 
-                <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
+                {/* <div className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                     <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
                         <div className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}>
                         <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
@@ -462,7 +571,7 @@ const handleImageChange = (e) => {
                         <p className="text-green-600 w-full m-0 p-1 box-border">13. Eski Meskelh sr</p>
                         <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
                     </div>
-                </div>
+                </div> */}
 
             </div>
 

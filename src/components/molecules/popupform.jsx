@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormField from "../atoms/FormField.jsx";
 import { useAddSong } from "../../hooks/useSongs.js";
 
-export default function PopupForm({ closePopup, onSubmit, formType }) {
+export default function PopupForm({ closePopup, formType }) {
   
   const [formValue, setFormValue] = useState({
     img: '',
