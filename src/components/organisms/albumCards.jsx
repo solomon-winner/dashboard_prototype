@@ -12,7 +12,7 @@ const Albums = () => {
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
  // const [Songs, setSongs] = useRecoilState(songsState);
-  const Albums= useRecoilValue(albumsState);
+  const [Albums, setAlbums]= useRecoilState(albumsState);
   const  updateSong  = useUpdateSong(); 
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album");
@@ -27,40 +27,30 @@ const handleUpdate = (id) => {
 };
 
 const handleSave = () => {
-  // Filter out empty songs
   const filteredSongs = editingAlbum.songs.filter((song) => song.trim() !== "");
-  // console.log("filteredSongs",filteredSongs)
-  // Create a FormData object
   const formData = new FormData();
 
-  // Append the album title
   formData.append("title", editingAlbum.title);
 
-  // Append the filtered songs
   filteredSongs.forEach((song, index) => {
     formData.append(`songs[${index}]`, song);
   });
 
-  // Append the image file (if a new file is selected)
   if (imageFile) {
     formData.append("img", imageFile);
   }
 
-  // Append the links
   formData.append("youtubeLink", editingAlbum.youtubeLink || "");
   formData.append("spotifyLink", editingAlbum.spotifyLink || "");
   formData.append("appleMusicLink", editingAlbum.appleMusicLink || "");
   formData.append("amazonLink", editingAlbum.amazonLink || "");
 
-  // Log the FormData for debugging
   for (let [key, value] of formData.entries()) {
     console.log(` ${key}: ${value}`);
   }
 
-  // Send the FormData to the server
   updateSong.mutate({ id: editingAlbum.id, data: formData });
 
-  // Reset the editingAlbum state
   setEditingAlbum(null);
 };
 
@@ -130,10 +120,9 @@ const handleImageChange = (e) => {
   };
 
   const handleAddSong = () => {
-    // Update the editingAlbum state immutably
     setEditingAlbum((prevAlbum) => ({
-      ...prevAlbum, // Copy all existing properties
-      songs: [...prevAlbum.songs, ""], // Add a new empty song to the songs array
+      ...prevAlbum, 
+      songs: [...prevAlbum.songs, ""], 
     }));
   };
 
@@ -243,19 +232,24 @@ const handleImageChange = (e) => {
         ) : (
                     <div className="text-2xl font-bold text-green-600 w-full mb-2">{album.title}</div>
         )}
-                    {album?.songs.map((song, index) => 
-                              editingAlbum?.id === album.id ? (
-                                <input
-                                  key={index}
-                                  type="text"
-                                  value={editingAlbum.songs[index]}
-                                  onChange={(e) => handleSongChange(index, e.target.value)}
-                                  className="text-green-600 w-full m-0 p-1 box-border"
-                                />
-                              ) : (
-                     <p className="text-green-600 w-full m-0 p-1 box-border">{song}</p>
-                              )
-                     )}
+{editingAlbum?.id === album.id ? (
+      editingAlbum.songs.map((song, index) => (
+        <input
+          key={index}
+          type="text"
+          value={song} // Bind to editingAlbum.songs[index]
+          onChange={(e) => handleSongChange(index, e.target.value)} // Update editingAlbum.songs
+          className="text-green-600 w-full m-0 p-1 box-border"
+        />
+      ))
+    ) : (
+      album.songs.map((song, index) => (
+        <p key={index} className="text-green-600 w-full m-0 p-1 box-border">
+          {song}
+        </p>
+      ))
+    )}
+
         {editingAlbum?.id === album.id && (
           <button
             onClick={handleAddSong}
