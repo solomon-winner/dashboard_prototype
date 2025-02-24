@@ -4,19 +4,21 @@ import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
 import { useAddSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
-import { songsState ,albumsState, editingAlbumState} from "../../state/state.js";
+import { songsState,editingSongState ,albumsState, editingAlbumState} from "../../state/state.js";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
- // const [Songs, setSongs] = useRecoilState(songsState);
-  const [Albums, setAlbums]= useRecoilState(albumsState);
+  const Albums= useRecoilValue(albumsState);
+  const Songs = useRecoilValue(songsState);
   const  updateSong  = useUpdateSong(); 
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album");
 const [editingAlbum, setEditingAlbum] = useRecoilState(editingAlbumState);
+const [editingSong, setEditingSong] = useRecoilState(editingSongState);
+
 const [imageFile, setImageFile] = useState(null);
 const [imagePreview, setImagePreview] = useState(''); 
 
@@ -57,6 +59,8 @@ const handleSave = () => {
 
 const handleCancel = () => {
   setEditingAlbum(null);
+  setEditingSong(null);
+  setImagePreview("");
 };
 
 const handleSongChange = (index, value) => {
@@ -125,7 +129,29 @@ const handleImageChange = (e) => {
       songs: [...prevAlbum.songs, ""], 
     }));
   };
+ const handleSingleUpdate = (id) => {
+    const updatedSong = Songs.find((song) => song.id === id);
+    setEditingSong(updatedSong);
+    setImagePreview(updatedSong.image);
+  }
 
+  const handleSingleChange = (key, value) => {
+    setEditingSong((prevSong) => ({
+      ...prevSong,
+      [key]: value,
+    }));
+  }
+  const handleSingleSave = () => {
+    const formData = new FormData();
+
+    formData.append("title", editingSong.title);
+    formData.append("youtubeLink", editingSong.youtubeLink);
+    if (imageFile) {
+      formData.append("img", imageFile);
+    }
+    updateSong.mutate({ id: editingSong.id, data: formData });
+    setEditingSong(null);
+  }
 
     return (
         <div className="w-full h-auto flex flex-col mt-5 text-left">
@@ -167,7 +193,6 @@ const handleImageChange = (e) => {
             style={{ backgroundImage: `url(${album.img})` }}
           >
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-              <IoMdAdd className="cursor-pointer" title="Add a song to this Album" />
               <MdOutlineUpdate className="cursor-pointer" title="Update this Album" onClick={() =>handleUpdate(album.id)} />
               <MdDeleteOutline className="cursor-pointer" title="Delete this Album" />
             </div>
@@ -215,7 +240,7 @@ const handleImageChange = (e) => {
             <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
               <FaAmazon />Buy on Amazon
             </button>
-            <button className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
+            <button onClick = {() => window.open(album.youtubeLink, "_blank", "noopener,noreferrer")} className="w-full h-12 flex items-center pl-2 gap-1 bg-green-600 text-white text-sm font-bold border-none cursor-pointer box-border hover:bg-green-700">
               <FaYoutube />Watch on YouTube
             </button>
           </>
@@ -280,81 +305,88 @@ const handleImageChange = (e) => {
             </div>
 
             <button className="w-36 h-8 flex self-end items-center justify-center bg-white mt-8 mr-16 text-green-600 text-sm font-semibold cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">See More Albums</button>
-            <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Single Release</div>
+            
+            <div>
+      <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">
+        Single Release
+      </div>
 
-            <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
-
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
-
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
-
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
-
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
-
-                <div className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white">
-                <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
-                        <MdOutlineUpdate className="cursor-pointer" title="Update this Song"/>
-                        <MdDeleteOutline className="cursor-pointer" title="Delete this Song"/>
-                        </div>
-                    <div className="w-full h-4/5 bg-white bg-cover bg-center box-border" style={{ backgroundImage: "url('../../assets/CEO_no_bg.png')" }}></div>
-                    <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
-                        <p className="text-green-600 text-lg m-0 p-1 box-border">Wletew Bezabgn</p>
-                    </div>
-                    <button className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white"><FaYoutube />Play the song</button>
-                </div>
+      <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
+        {Songs.map((song) => (
+          <div
+            key={song.id} // Use a unique key for each song
+            className="relative w-72 h-72 flex flex-col gap-2 shadow-md bg-white"
+          >
+            {/* Update and Delete Icons */}
+            <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
+              <MdOutlineUpdate onClick = {() => handleSingleUpdate(song.id)} className="cursor-pointer" title="Update this Song" />
+              <MdDeleteOutline className="cursor-pointer" title="Delete this Song" />
             </div>
+
+            {/* Song Image */}
+            {editingSong?.id === song.id ? (
+              <>
+              <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4 ml-[75px]" />
+              <div
+              className="w-full h-4/5 bg-white bg-cover bg-center box-border"
+              style={{ backgroundImage: `url(${imagePreview})` }} // Use dynamic image URL
+            ></div>
+            </>
+            ):(
+            <div
+              className="w-full h-4/5 bg-white bg-cover bg-center box-border"
+              style={{ backgroundImage: `url(${song.img})` }} // Use dynamic image URL
+            ></div>
+            )}
+
+
+            {/* Song Title */}
+            <div className="w-full h-auto flex flex-col pl-5 gap-1 box-border">
+              {editingSong?.id === song.id ? (
+                <input
+                  type="text" 
+                  value={editingSong?.title || ""}
+                  onChange={(e) => handleSingleChange("title",e.target.value)}
+                  className="text-2xl font-bold text-green-600 w-full mb-2"
+                />
+              ):(
+                <p className="text-green-600 text-lg m-0 p-1 box-border">
+                {song.title} 
+              </p> 
+              )}
+            </div>
+
+            {/* Play Button */}
+            {
+              editingSong?.id === song.id ? (
+                <>
+                <input
+                  type="text"
+                  value={editingSong?.youtubeLink || ""}
+                  onChange={(e) => handleSingleChange("youtubeLink",e.target.value)}
+                  className="w-full h-12 p-2 border border-green-600"
+                  placeholder="YouTube Link"
+                />
+                <div className="w-full flex gap-2 mt-2">
+                  <button onClick={handleSingleSave} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                    Save
+                  </button>
+                  <button onClick={handleCancel} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                    Cancel
+                  </button>
+                </div>
+                </>
+              ):(
+            <button onClick={() => window.open(song.youtubeLink, "_blank", "noopener,noreferrer")} className="w-full max-w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border mt-2 hover:bg-green-700 hover:text-white">
+              <FaYoutube /> Play the song
+            </button>                
+              )
+            }
+
+          </div>
+        ))}
+      </div>
+    </div>
             <button className="w-36 h-8 flex self-end items-center justify-center bg-white mt-8 mr-16 text-green-600 text-sm font-semibold cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">See More Songs</button>
         </div>
     );

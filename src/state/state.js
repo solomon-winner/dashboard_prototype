@@ -20,7 +20,7 @@ export const editingAlbumState = atom({
   default: null,
 });
 
-export const editingSongIdState = atom({
+export const editingSongState = atom({
   key: 'editingSongIdState',
   default: null,
 });
