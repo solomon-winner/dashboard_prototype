@@ -159,7 +159,6 @@ export const removeMessage = async (id) => {
 export const fetchSongs = async (type) => {
   try {
     const response = await apiClient.get(`/songs?type=${type}`);
-    console.log("This is from the api///...-=-=-=>",response.data.data);
     return response.data.data;
   } catch (error) {
     handleError(error);

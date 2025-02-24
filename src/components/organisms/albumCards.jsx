@@ -5,32 +5,31 @@ import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
 import { useAddSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
 import { songsState ,albumsState, editingAlbumState} from "../../state/state.js";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
  // const [Songs, setSongs] = useRecoilState(songsState);
-  const [Albums, setAlbums] = useRecoilState(albumsState);
+  const Albums= useRecoilValue(albumsState);
   const  updateSong  = useUpdateSong(); 
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");
-const { isLoading: isAlbumLoading, isError: albumError, data: albums } = useSongs("album");
-const [albumTitle, setAlbumTitle] = useState('Balewletaye (ባለውለታየ)');
+const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album");
 const [editingAlbum, setEditingAlbum] = useRecoilState(editingAlbumState);
-console.log("Albums",Albums)
 const [imageFile, setImageFile] = useState(null);
-const [imagePreview, setImagePreview] = useState('https://via.placeholder.com/300'); 
+const [imagePreview, setImagePreview] = useState(''); 
 
 const handleUpdate = (id) => {
   const updatedAlbum = Albums.find(album => album.id === id);
   setEditingAlbum(updatedAlbum);
+  setImagePreview(updatedAlbum.img);
 };
 
 const handleSave = () => {
   // Filter out empty songs
   const filteredSongs = editingAlbum.songs.filter((song) => song.trim() !== "");
-
+  // console.log("filteredSongs",filteredSongs)
   // Create a FormData object
   const formData = new FormData();
 
@@ -55,7 +54,7 @@ const handleSave = () => {
 
   // Log the FormData for debugging
   for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
+    console.log(` ${key}: ${value}`);
   }
 
   // Send the FormData to the server
@@ -87,7 +86,6 @@ const handleLinkChange = (key, value) => {
     ...prevAlbum,
     [key]: value,
   }));
-  console.log("handleLinkChange",editingAlbum)
 };
 
 if (isSongLoading || isAlbumLoading) return <div>Loading...</div>;
@@ -98,7 +96,6 @@ const openPopup = (type) => {
     setFormType(type);
     setIsOpen(true);
   };  
-//   console.log("---->//==>",Albums.data);
   const closePopup = () => setIsOpen(false);
 
   const handleSubmit = (event) => {
@@ -155,7 +152,8 @@ const handleImageChange = (e) => {
             
             <div className="text-2xl font-bold text-green-600 w-full mb-2 pl-2 pb-2">Albums</div>
             <div className="w-full h-auto flex flex-wrap justify-start items-center gap-8 max-w-full box-border">
-                {Albums.map((album) => (
+                {Albums?.map((album) => (
+      
                 <div key={album.id} className="relative w-[27rem] h-auto p-5 flex gap-2 shadow-md">
                 <div className="w-3/5 min-h-[30rem] flex flex-col items-center gap-1 box-border">
                 {editingAlbum?.id === album.id ? (
@@ -177,7 +175,7 @@ const handleImageChange = (e) => {
         ) : (
           <div
             className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end"
-            style={{ backgroundImage: `url(${imagePreview})` }}
+            style={{ backgroundImage: `url(${album.img})` }}
           >
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
               <IoMdAdd className="cursor-pointer" title="Add a song to this Album" />
@@ -239,18 +237,18 @@ const handleImageChange = (e) => {
           <input
             type="text"
             value={editingAlbum.title}
-            onChange={(e) => setAlbumTitle(e.target.value)}
+            onChange={(e) => handleLinkChange("title",e.target.value)}
             className="text-2xl font-bold text-green-600 w-full mb-2"
           />
         ) : (
                     <div className="text-2xl font-bold text-green-600 w-full mb-2">{album.title}</div>
         )}
-                    {album.songs.map((song, index) => 
+                    {album?.songs.map((song, index) => 
                               editingAlbum?.id === album.id ? (
                                 <input
                                   key={index}
                                   type="text"
-                                  value={song}
+                                  value={editingAlbum.songs[index]}
                                   onChange={(e) => handleSongChange(index, e.target.value)}
                                   className="text-green-600 w-full m-0 p-1 box-border"
                                 />
