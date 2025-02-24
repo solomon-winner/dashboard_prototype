@@ -3,7 +3,7 @@ import { FaSpotify, FaApple, FaAmazon, FaYoutube } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineUpdate, MdDeleteOutline } from "react-icons/md";
 import PopupForm from "../molecules/popupform.jsx";
-import { useAddSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
+import { useAddSong, useRemoveSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
 import { songsState,editingSongState ,albumsState, editingAlbumState} from "../../state/state.js";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -11,9 +11,10 @@ const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
-  const Albums= useRecoilValue(albumsState);
-  const Songs = useRecoilValue(songsState);
+  const [Albums, setAlbums]= useRecoilState(albumsState);
+  const [Songs,setSongs] = useRecoilState(songsState);
   const  updateSong  = useUpdateSong(); 
+  const RemoveSong = useRemoveSong();
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");
 const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album");
 const [editingAlbum, setEditingAlbum] = useRecoilState(editingAlbumState);
@@ -153,6 +154,8 @@ const handleImageChange = (e) => {
     setEditingSong(null);
   }
 
+
+
     return (
         <div className="w-full h-auto flex flex-col mt-5 text-left">
             <div className="w-full h-auto flex text-left justify-end">
@@ -194,7 +197,7 @@ const handleImageChange = (e) => {
           >
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
               <MdOutlineUpdate className="cursor-pointer" title="Update this Album" onClick={() =>handleUpdate(album.id)} />
-              <MdDeleteOutline className="cursor-pointer" title="Delete this Album" />
+              <MdDeleteOutline onClick={() => RemoveSong(album.id)} className="cursor-pointer" title="Delete this Album" />
             </div>
           </div>
         )}
@@ -320,7 +323,7 @@ const handleImageChange = (e) => {
             {/* Update and Delete Icons */}
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
               <MdOutlineUpdate onClick = {() => handleSingleUpdate(song.id)} className="cursor-pointer" title="Update this Song" />
-              <MdDeleteOutline className="cursor-pointer" title="Delete this Song" />
+              <MdDeleteOutline onClick={() => RemoveSong(song.id)} className="cursor-pointer" title="Delete this Song" />
             </div>
 
             {/* Song Image */}

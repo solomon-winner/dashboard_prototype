@@ -110,5 +110,5 @@ export const useRemoveSong = () => {
     }
   }, [mutation.isError, mutation.error]);
 
-  return mutation;
+  return mutation.mutate; // ✅ Return only `mutate` function
 };
