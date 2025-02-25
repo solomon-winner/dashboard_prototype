@@ -20,14 +20,14 @@ const Information = () => {
     const [content, setContent] = useRecoilState(contentState);
     const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
-    const [imageFile1, setImageFile1] = useState(null); // State for first image
-    const [imagePreview1, setImagePreview1] = useState(null); // Preview for first image
-    const [imageFile2, setImageFile2] = useState(null); // State for second image
-    const [imagePreview2, setImagePreview2] = useState(null); // Preview for second image
-    const [showSaveButton1, setShowSaveButton1] = useState(false); // Save button for first image
-    const [showSaveButton2, setShowSaveButton2] = useState(false); // Save button for second image
-    const fileInputRef1 = useRef(null); // Ref for first file input
-    const fileInputRef2 = useRef(null); // Ref for second file input
+    const [imageFile1, setImageFile1] = useState(null); 
+    const [imagePreview1, setImagePreview1] = useState(null); 
+    const [imageFile2, setImageFile2] = useState(null); 
+    const [imagePreview2, setImagePreview2] = useState(null); 
+    const [showSaveButton1, setShowSaveButton1] = useState(false); 
+    const [showSaveButton2, setShowSaveButton2] = useState(false); 
+    const fileInputRef1 = useRef(null); 
+    const fileInputRef2 = useRef(null); 
     const updateGeneralInfo = useUpdateGeneralInfo();
     const updateBannerCard = useUpdateBannerCard();
     const { isLoading, error } = useBannerCards();
@@ -35,7 +35,6 @@ const Information = () => {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    // Handle image selection for the first div
     const handleImageChange1 = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -45,11 +44,10 @@ const Information = () => {
                 setImagePreview1(reader.result);
             };
             reader.readAsDataURL(file);
-            setShowSaveButton1(true); // Show Save button for first image
+            setShowSaveButton1(true); 
         }
     };
 
-    // Handle image selection for the second div
     const handleImageChange2 = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -59,48 +57,16 @@ const Information = () => {
                 setImagePreview2(reader.result);
             };
             reader.readAsDataURL(file);
-            setShowSaveButton2(true); // Show Save button for second image
+            setShowSaveButton2(true); 
         }
     };
 
-    // Trigger file input for the first div
     const handleDivClick1 = () => {
         fileInputRef1.current.click();
     };
 
-    // Trigger file input for the second div
     const handleDivClick2 = () => {
         fileInputRef2.current.click();
-    };
-
-    // Handle saving the first image
-    const handleSave1 = () => {
-        if (!imageFile1) return;
-
-        const formData = new FormData();
-        formData.append('image', imageFile1);
-
-        // Send the image to the server
-        updateGeneralInfo.mutate(formData);
-    };
-
-    // Handle saving the second image
-    const handleSave2 = () => {
-        if (!imageFile2) return;
-
-        const formData = new FormData();
-        formData.append('image', imageFile2);
-
-        // Send the image to the server
-        updateGeneralInfo.mutate(formData, {
-            onSuccess: () => {
-                alert('Second image saved successfully!');
-                setShowSaveButton2(false); // Hide Save button after saving
-            },
-            onError: () => {
-                alert('Failed to save the second image.');
-            },
-        });
     };
 
     const handleBannerDivClick = () => {
@@ -150,12 +116,10 @@ const Information = () => {
         formData.append('aboutInfo', companyInfo);
         if (imageFile1) {
             formData.append('bannerPic', imageFile1);
-            console.log("handleSubmit for 1")
 
         }
         if (imageFile2) {
             formData.append('aboutPic', imageFile2);
-            console.log("handleSubmit")
 
         }
 
@@ -163,6 +127,8 @@ const Information = () => {
         setIsBannerInfoEditing(false);
         setEditingCardId(null);
         setIsEditingCompanyInfo(false);
+        setShowSaveButton1(false);
+        setShowSaveButton2(false);
     };
 
     const handleCardInfoSave = () => {
