@@ -6,6 +6,7 @@ import PopupForm from "../molecules/popupform.jsx";
 import { useAddSong, useRemoveSong, useSongs,useUpdateSong  } from "../../hooks/useSongs.js";
 import { songsState,editingSongState ,albumsState, editingAlbumState} from "../../state/state.js";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { baseURL } from "../../utils/constants.js";
 
 const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -193,7 +194,7 @@ const handleImageChange = (e) => {
         ) : (
           <div
             className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end"
-            style={{ backgroundImage: `url(${album.img})` }}
+            style={{ backgroundImage: `url(${baseURL}public/${album.img})` }}
           >
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
               <MdOutlineUpdate className="cursor-pointer" title="Update this Album" onClick={() =>handleUpdate(album.id)} />
@@ -338,7 +339,7 @@ const handleImageChange = (e) => {
             ):(
             <div
               className="w-full h-4/5 bg-white bg-cover bg-center box-border"
-              style={{ backgroundImage: `url(${song.img})` }} // Use dynamic image URL
+              style={{ backgroundImage: `url(${baseURL}public/${song.img})` }} // Use dynamic image URL
             ></div>
             )}
 

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {baseURL} from "./constants.js"
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: `${baseURL}api`,
 });
 
 // Request Interceptor
