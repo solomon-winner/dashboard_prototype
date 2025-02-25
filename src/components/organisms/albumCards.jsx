@@ -11,8 +11,8 @@ const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
-  const [Albums, setAlbums]= useRecoilState(albumsState);
-  const [Songs,setSongs] = useRecoilState(songsState);
+  const Albums= useRecoilValue(albumsState);
+  const Songs = useRecoilValue(songsState);
   const  updateSong  = useUpdateSong(); 
   const RemoveSong = useRemoveSong();
 const { isLoading: isSongLoading, isError: songError } = useSongs("song");

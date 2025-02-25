@@ -140,6 +140,13 @@ const Information = () => {
         setEditingCardId(null);
         console.log(updatedCard);
     };
+    const handleCancel =() => {
+        setIsBannerInfoEditing(false);
+        setEditingCardId(null);
+        setIsEditingCompanyInfo(false);
+        setShowSaveButton1(false);
+        setShowSaveButton2(false);
+    }
 
     return (
         <div className="ml-[15rem] bg-white-100 min-h-screen ">
@@ -159,9 +166,15 @@ const Information = () => {
                                     onChange={handleContentChange}
                                     className="border p-2 w-full h-full"
                                 />
-                                <button type="submit" className="mt-2 p-2 bg-blue-500 text-white">
+                                <div className='flex items-center gap-[1px]'>
+                                <button type="submit" className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
                                     Save
                                 </button>
+                                <button onClick={handleCancel} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                                     Cancel
+                                </button>                                    
+                                </div>
+
                             </form>
                         ) : (
                             <>
@@ -207,7 +220,7 @@ const Information = () => {
                 {CardInfo.map((card) => (
                     <div key={card.id} className="w-[30%] h-auto m-0 mx-1 bg-white" onClick={() => handleCardInfoClick(card.id)}>
                         {editingCardId === card.id ? (
-                            <form onSubmit={(e) => { e.preventDefault(); handleCardInfoSave(); }} className="w-full h-full">
+                            <form onSubmit={(e) => { e.preventDefault(); handleCardInfoSave(); }} className="w-full h-[80%]">
                                 <textarea
                                     value={card.title}
                                     onChange={(e) => handleCardInfoChange(card.id, "title", e.target.value)}
@@ -219,9 +232,14 @@ const Information = () => {
                                     onChange={(e) => handleCardInfoChange(card.id, "description", e.target.value)}
                                     className="border p-2 w-full h-full"
                                 ></textarea>
-                                <button type="submit" className="mt-2 p-2 bg-blue-500 text-white">
+                                <div className='flex items-center gap-[1px]'>
+                                <button type="submit" className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
                                     Save
                                 </button>
+                                <button onClick={handleCancel} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                                     Cancel
+                                </button>                                    
+                                </div>
                             </form>
                         ) : (
                             <>
@@ -237,7 +255,7 @@ const Information = () => {
                 ))}
             </div>
 
-            <div className="mt-32 w-full flex justify-between gap-[10%] items-center h-auto">
+            <div className="mt-32 w-full flex justify-between gap-[5%] items-center h-auto">
     {/* Second Image Div */}
     <div className="flex flex-col items-center w-3/5">
         <div
@@ -277,9 +295,14 @@ const Information = () => {
                     onChange={handleCompanyInfoChange}
                     className="border p-2 w-full h-full"
                 ></textarea>
-                <button type='submit' className="mt-2 p-2 bg-blue-500 text-white">
-                    Save
-                </button>
+                                <div className='flex items-center gap-[1px]'>
+                                <button type="submit" className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                                    Save
+                                </button>
+                                <button onClick={handleCancel} className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-lg font-bold cursor-pointer border border-green-600 box-border hover:bg-green-700 hover:text-white">
+                                     Cancel
+                                </button>                                    
+                                </div>
             </form>
             :
             <p>
@@ -288,7 +311,7 @@ const Information = () => {
         }
     </div>
 </div>
-        </div>
+</div>
     );
 };
 
