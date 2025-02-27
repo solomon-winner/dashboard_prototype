@@ -14,10 +14,10 @@ const menuItems = [
   { icon: <FaHome />, text: "Home", to: "/"},
   { icon: <GiLoveSong />, text: "Songs", to: "songs"},
   { icon: <HiSpeakerphone />, text: "Testimonies", to: "testimonies"},
-  { icon: <FaMailBulk />, text: "Subscribers", to: "subscribers"},
+  // { icon: <FaMailBulk />, text: "Subscribers", to: "subscribers"},
   { icon: <GrUpdate />, text: "Update information", to: "information"},
-  { icon: <TbBuildingBroadcastTowerFilled />, text: "Post Message", to: "posts"},
-  { icon: <IoMdSettings />, text: "Settings", to: "settings"},
+  // { icon: <TbBuildingBroadcastTowerFilled />, text: "Post Message", to: "posts"},
+  // { icon: <IoMdSettings />, text: "Settings", to: "settings"},
 ];
 
 const SideBar = () => {

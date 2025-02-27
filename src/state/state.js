@@ -27,12 +27,12 @@ export const editingSongState = atom({
 
 export const titleState = atom({
   key: 'titleState',
-  default: 'Psalms 95: 1-6',
+  default: '',
 });
 
 export const contentState = atom({
   key: 'contentState',
-  default: '"... Sing joyful songs to the LORD! Praise the mighty rock where we are safe. Come to worship him with thankful hearts and songs of praise. the LORD is the greatest God, king over all other gods..."',
+  default: '',
 });
 
 export const companyInfoState = atom({
