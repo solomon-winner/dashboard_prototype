@@ -38,27 +38,32 @@ export const useSongs = (type) => {
   return { data, isLoading, isError };
 };
 
-export const useAddSong = () => {
+export const useAddSong = (type) => {
   const queryClient = useQueryClient();
+  const setSongs = useSetRecoilState(songsState);
+  const setAlbums = useSetRecoilState(albumsState);
 
   const mutation = useMutation({
-    mutationFn: addSongs,
+    mutationFn: addSongs, // Ensure this function handles both songs/albums
     retry: 2,
+    onSuccess: (newItem) => {
+      
+      queryClient.invalidateQueries(['songs', type]);
+    },
   });
 
   useEffect(() => {
     if (mutation.isSuccess) {
-      queryClient.invalidateQueries({ queryKey: ['songs'] });
-      toast.success('Song added successfully.');
+      toast.success(`${type === 'song' ? 'Song' : 'Album'} added successfully.`);
     }
-  }, [mutation.isSuccess, queryClient]);
+  }, [mutation.isSuccess, type]);
 
   useEffect(() => {
     if (mutation.isError) {
-      console.error('Error adding song:', mutation.error.message);
-      toast.error('Failed to add song. Please try again.');
+      toast.error(`Failed to add ${type === 'song' ? 'song' : 'album'}.`);
+      console.error(mutation.error);
     }
-  }, [mutation.isError, mutation.error]);
+  }, [mutation.isError, mutation.error, type]);
 
   return mutation;
 };
@@ -68,7 +73,7 @@ export const useUpdateSong = () => {
 
   const mutation = useMutation({
     mutationFn: ({ id, data }) => updateSong(id, data),
-    retry: 2,
+    retry: 1,
   });
 
   useEffect(() => {

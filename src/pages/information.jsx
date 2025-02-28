@@ -1,29 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     isEditingCompanyInfoState,
-    titleState,
-    contentState,
-    companyInfoState,
     cardInfoState,
     isEditingBannerInfoState,
     editingCardIdState,
+    generalInfoState,
 } from '../state/state';
-import { useRecoilState } from 'recoil';
-import { useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useGeneralInfo, useUpdateGeneralInfo } from '../hooks/useGeneralInfo';
 import { useBannerCards, useUpdateBannerCard } from '../hooks/useBannerCards.js';
+import { baseURL } from '../utils/constants.js';
 
 const Information = () => {
+      const { isLoading: isGeneralLoading, isError: Generalerror } = useGeneralInfo();
+      const [General, setGeneral] = useRecoilState(generalInfoState);
+
     const [isBannerInfoEditing, setIsBannerInfoEditing] = useRecoilState(isEditingBannerInfoState);
     const [editingCardId, setEditingCardId] = useRecoilState(editingCardIdState);
     const [isEditingCompanyInfo, setIsEditingCompanyInfo] = useRecoilState(isEditingCompanyInfoState);
-    const [title, setTitle] = useRecoilState(titleState);
-    const [content, setContent] = useRecoilState(contentState);
-    const [companyInfo, setCompanyInfo] = useRecoilState(companyInfoState);
     const [CardInfo, setCardInfo] = useRecoilState(cardInfoState);
     const [imageFile1, setImageFile1] = useState(null); 
-    const [imagePreview1, setImagePreview1] = useState(null); 
+    useEffect(() => {
+        if (General) {
+            setImagePreview1(`${baseURL}public/${General.bannerPic}`);
+            setImagePreview2(`${baseURL}public/${General.aboutPic}`);
+        }
+    }, [General]);
+    const [imagePreview1, setImagePreview1] = useState(`${baseURL}public/${General.bannerPic}`); 
     const [imageFile2, setImageFile2] = useState(null); 
-    const [imagePreview2, setImagePreview2] = useState(null); 
+    const [imagePreview2, setImagePreview2] = useState(`${baseURL}public/${General.aboutPic}`); 
     const [showSaveButton1, setShowSaveButton1] = useState(false); 
     const [showSaveButton2, setShowSaveButton2] = useState(false); 
     const fileInputRef1 = useRef(null); 
@@ -86,14 +91,16 @@ const Information = () => {
         setIsBannerInfoEditing(false);
         setEditingCardId(null);
     };
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target; 
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
+        setGeneral((prevState) => ({
+            ...prevState,
+            [name]: value, 
+        }));
     };
-
-    const handleContentChange = (e) => {
-        setContent(e.target.value);
-    };
+    
 
     const handleCardInfoChange = (id, field, value) => {
         setCardInfo((prevCards) =>
@@ -103,17 +110,14 @@ const Information = () => {
         );
     };
 
-    const handleCompanyInfoChange = (e) => {
-        setCompanyInfo(e.target.value);
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit")
         const formData = new FormData();
-        formData.append('bannerTitle', title);
-        formData.append('bannerInfo', content);
-        formData.append('aboutInfo', companyInfo);
+        formData.append('title', General.title);
+        formData.append('bannerInfo', General.bannerInfo);
+        formData.append('aboutInfo', General.aboutInfo);
         if (imageFile1) {
             formData.append('bannerPic', imageFile1);
 
@@ -157,13 +161,15 @@ const Information = () => {
                             <form onSubmit={handleSubmit}>
                                 <input
                                     type="text"
-                                    value={title}
-                                    onChange={handleTitleChange}
+                                    value={General.title}
+                                    name = 'title'
+                                    onChange={handleChange}
                                     className="border p-2 w-full"
                                 />
                                 <textarea
-                                    value={content}
-                                    onChange={handleContentChange}
+                                    value={General.bannerInfo}
+                                    name='bannerInfo'
+                                    onChange={handleChange}
                                     className="border p-2 w-full h-full"
                                 />
                                 <div className='flex items-center gap-[1px]'>
@@ -178,8 +184,8 @@ const Information = () => {
                             </form>
                         ) : (
                             <>
-                                <h3>{title}</h3>
-                                <p>{content}</p>
+                                <h3>{General.title}</h3>
+                                <p>{General.bannerInfo}</p>
                             </>
                         )}
                     </div>
@@ -188,7 +194,7 @@ const Information = () => {
                     <div className="flex flex-col items-center gap-4">
                         <div
                             className="w-[500px] h-[80vh] bg-cover bg-center border-b-[15px] border-[#185601] rounded-b-[60%] cursor-pointer"
-                            style={{ backgroundImage: imagePreview1 ? `url(${imagePreview1})` : 'none' }}
+                            style={{ backgroundImage: imagePreview1 ? `url("${imagePreview1}")` : 'none' }}
                             onClick={handleDivClick1}
                         >
                             {!imagePreview1 && (
@@ -260,7 +266,7 @@ const Information = () => {
     <div className="flex flex-col items-center w-3/5">
         <div
             className="w-full h-[500px] bg-cover bg-center cursor-pointer"
-            style={{ backgroundImage: imagePreview2 ? `url(${imagePreview2})` : 'none' }}
+            style={{ backgroundImage: imagePreview2 ? `url("${imagePreview2}")` : 'none' }}
             onClick={handleDivClick2}
         >
             {!imagePreview2 && (
@@ -291,8 +297,9 @@ const Information = () => {
         {isEditingCompanyInfo ?
             <form onSubmit={handleSubmit} className='w-full h-full'>
                 <textarea
-                    value={companyInfo}
-                    onChange={handleCompanyInfoChange}
+                    value={General.aboutInfo}
+                    name='aboutInfo'
+                    onChange={handleChange}
                     className="border p-2 w-full h-full"
                 ></textarea>
                                 <div className='flex items-center gap-[1px]'>
@@ -306,7 +313,7 @@ const Information = () => {
             </form>
             :
             <p>
-                {companyInfo}
+                {General.aboutInfo}
             </p>
         }
     </div>

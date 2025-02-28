@@ -12,26 +12,26 @@ const Albums = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState('');
   const addSong = useAddSong();
+ const { isLoading: isSongLoading, isError: songError } = useSongs("song");
+const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album"); 
   const Albums= useRecoilValue(albumsState);
   const Songs = useRecoilValue(songsState);
   const  updateSong  = useUpdateSong(); 
   const RemoveSong = useRemoveSong();
-const { isLoading: isSongLoading, isError: songError } = useSongs("song");
-const { isLoading: isAlbumLoading, isError: albumError } = useSongs("album");
+
 const [editingAlbum, setEditingAlbum] = useRecoilState(editingAlbumState);
 const [editingSong, setEditingSong] = useRecoilState(editingSongState);
-
 const [imageFile, setImageFile] = useState(null);
 const [imagePreview, setImagePreview] = useState(''); 
 
 const handleUpdate = (id) => {
   const updatedAlbum = Albums.find(album => album.id === id);
   setEditingAlbum(updatedAlbum);
-  setImagePreview(updatedAlbum.img);
+  setImagePreview(`${baseURL}public/${updatedAlbum.img}`);
 };
 
 const handleSave = () => {
-  const filteredSongs = editingAlbum.songs.filter((song) => song.trim() !== "");
+  const filteredSongs = editingAlbum?.songs.filter((song) => song.trim() !== "");
   const formData = new FormData();
 
   formData.append("title", editingAlbum.title);
@@ -134,7 +134,7 @@ const handleImageChange = (e) => {
  const handleSingleUpdate = (id) => {
     const updatedSong = Songs.find((song) => song.id === id);
     setEditingSong(updatedSong);
-    setImagePreview(updatedSong.image);
+    setImagePreview(`${baseURL}public/${updatedSong.img}`);
   }
 
   const handleSingleChange = (key, value) => {
@@ -194,7 +194,7 @@ const handleImageChange = (e) => {
         ) : (
           <div
             className="w-full p-2 h-4/5 bg-white bg-cover bg-center shadow-md box-border border border-green-600 flex justify-end"
-            style={{ backgroundImage: `url(${baseURL}public/${album.img})` }}
+            style={{ backgroundImage: `url("${baseURL}public/${album.img}")` }}
           >
             <div className="absolute top-[1rem] left-[94%] transform -translate-x-1/2 w-8 h-fit gap-5 bg-black bg-opacity-10 rounded-full font-extrabold text-green-700 flex flex-col justify-around pt-5 pb-5 items-center z-10">
               <MdOutlineUpdate className="cursor-pointer" title="Update this Album" onClick={() =>handleUpdate(album.id)} />
@@ -206,28 +206,28 @@ const handleImageChange = (e) => {
           <>
             <input
               type="text"
-              value={editingAlbum.appleMusicLink}
+              value={editingAlbum?.appleMusicLink}
               onChange={(e) => handleLinkChange('appleMusicLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Apple Music Link"
             />
             <input
               type="text"
-              value={editingAlbum.spotifyLink}
+              value={editingAlbum?.spotifyLink}
               onChange={(e) => handleLinkChange('spotifyLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Spotify Link"
             />
             <input
               type="text"
-              value={editingAlbum.amazonLink}
+              value={editingAlbum?.amazonLink}
               onChange={(e) => handleLinkChange('amazonLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="Amazon Link"
             />
             <input
               type="text"
-              value={editingAlbum.youtubeLink}
+              value={editingAlbum?.youtubeLink}
               onChange={(e) => handleLinkChange('youtubeLink', e.target.value)}
               className="w-full h-12 p-2 border border-green-600"
               placeholder="YouTube Link"
@@ -254,7 +254,7 @@ const handleImageChange = (e) => {
                 {editingAlbum?.id === album.id ? (
           <input
             type="text"
-            value={editingAlbum.title}
+            value={editingAlbum?.title}
             onChange={(e) => handleLinkChange("title",e.target.value)}
             className="text-2xl font-bold text-green-600 w-full mb-2"
           />
@@ -262,7 +262,7 @@ const handleImageChange = (e) => {
                     <div className="text-2xl font-bold text-green-600 w-full mb-2">{album.title}</div>
         )}
 {editingAlbum?.id === album.id ? (
-      editingAlbum.songs.map((song, index) => (
+      editingAlbum?.songs.map((song, index) => (
         <input
           key={index}
           type="text"
@@ -333,13 +333,13 @@ const handleImageChange = (e) => {
               <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4 ml-[75px]" />
               <div
               className="w-full h-4/5 bg-white bg-cover bg-center box-border"
-              style={{ backgroundImage: `url(${imagePreview})` }} // Use dynamic image URL
+              style={{ backgroundImage: `url("${imagePreview}")` }} // Use dynamic image URL
             ></div>
             </>
             ):(
             <div
               className="w-full h-4/5 bg-white bg-cover bg-center box-border"
-              style={{ backgroundImage: `url(${baseURL}public/${song.img})` }} // Use dynamic image URL
+              style={{ backgroundImage: `url("${baseURL}public/${song.img}")` }} // Use dynamic image URL
             ></div>
             )}
 

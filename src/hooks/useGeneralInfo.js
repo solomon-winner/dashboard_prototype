@@ -3,6 +3,8 @@ import { fetchGeneralInfo, updateGeneralInfo } from '../utils/api.js';
 import handleError from '../utils/errorHandler.js';
 import { useSetRecoilState } from 'recoil';
 import { generalInfoState } from '../state/state.js';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 export const useGeneralInfo = () => {
   const setGeneralInfo = useSetRecoilState(generalInfoState);
@@ -18,7 +20,7 @@ export const useGeneralInfo = () => {
   // Update Recoil state when data is fetched
   useEffect(() => {
     if (data) {
-      setGeneralInfo(data);
+      setGeneralInfo(data.data);
     }
   }, [data, setGeneralInfo]);
 

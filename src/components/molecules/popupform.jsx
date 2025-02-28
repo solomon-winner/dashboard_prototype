@@ -57,7 +57,6 @@ export default function PopupForm({ closePopup, formType }) {
     const formData = new FormData(event.target);
     formData.append("type", formType);
   
-    // Append each song individually
     formValue.songs.forEach((song, index) => {
       formData.append(`songs[${index}]`, song);
     });
