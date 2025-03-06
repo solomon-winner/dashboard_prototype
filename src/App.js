@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
 
   return (
-    <>
+    <div className = "border border-red-100">
         <ToastContainer position="top-right" autoClose={5000} />
   
     <Router>
@@ -35,7 +35,7 @@ function App() {
     </Route>
     </Routes>
   </Router>
-  </>
+  </div>
   );
 }
 

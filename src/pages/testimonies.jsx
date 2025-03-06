@@ -14,7 +14,7 @@ const Testimonies = () => {
   console.log("Testimonies: ", testimonies);
 
   return (
-    <div className="ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
+    <div className="md:ml-[13rem] bg-white-100 min-h-screen flex flex-col gap-5">
       <div className=" max-w-5xl mx-auto p-6 ">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">

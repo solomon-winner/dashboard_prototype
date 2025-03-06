@@ -397,3 +397,76 @@ const handleImageChange = (e) => {
 };
 
 export default Albums;
+
+
+//   <div className="w-full flex flex-col sm:flex-row justify-end gap-2 sm:gap-4">
+//     <button 
+//       onClick={() => openPopup('song')}
+//       className="w-full sm:w-32 h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-bold cursor-pointer border border-green-600 hover:bg-green-700 hover:text-white transition-colors"
+//     >
+//       <IoMdAdd />Add song
+//     </button>
+//     <button 
+//       onClick={() => openPopup('album')}
+//       className="w-full sm:w-32 h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-sm font-bold cursor-pointer border border-green-600 hover:bg-green-700 hover:text-white transition-colors"
+//     >
+//       <IoMdAdd />Add Album
+//     </button>
+//     {isOpen && <PopupForm closePopup={closePopup} onSubmit={handleSubmit} formType={formType} />}
+//   </div>
+
+//   <div className="text-2xl font-bold text-green-600 w-full mb-2 pb-2">Albums</div>
+//   <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//     {Albums?.map((album) => (
+//       <div key={album.id} className="relative w-full h-auto p-4 sm:p-5 flex flex-col md:flex-row gap-4 shadow-md">
+//         <div className="w-full md:w-1/2 min-h-[20rem] sm:min-h-[25rem] flex flex-col items-center gap-2">
+//         </div>
+
+//         <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-start">
+          
+//           <div className="w-full flex flex-col sm:flex-row gap-2 mt-4">
+//             <button className="w-full sm:w-auto px-4 h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-base font-bold cursor-pointer border border-green-600 hover:bg-green-700 hover:text-white">
+//               <FaYoutube />Play
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     ))}
+//   </div>
+
+//   <button className="w-full sm:w-36 h-8 self-end mt-8 bg-white text-green-600 text-sm font-semibold cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">
+//     See More Albums
+//   </button>
+
+//   <div className="text-2xl font-bold text-green-600 w-full mb-2 pb-2">Single Release</div>
+//   <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//     {Songs.map((song) => (
+//       <div key={song.id} className="relative w-full aspect-square flex flex-col gap-2 shadow-md bg-white p-4">
+        
+//         <button className="w-full h-8 flex items-center justify-center gap-1 bg-white text-green-600 text-base font-bold cursor-pointer border border-green-600 hover:bg-green-700 hover:text-white">
+//           <FaYoutube /> Play
+//         </button>
+//       </div>
+//     ))}
+//   </div>
+
+//   <button className="w-full sm:w-36 h-8 self-end mt-8 bg-white text-green-600 text-sm font-semibold cursor-pointer border border-green-600 shadow-md hover:bg-green-700 hover:text-white">
+//     See More Songs
+//   </button>
+// </div> */}
+
+// // module.exports = {
+// //   theme: {
+// //     screens: {
+// //       'sm': '640px',
+// //       'md': '768px',
+// //       'lg': '1024px',
+// //       'xl': '1280px',
+// //     },
+// //     extend: {
+// //       aspectRatio: {
+// //         'square': '1 / 1',
+// //       },
+// //     }
+// //   }
+// // }

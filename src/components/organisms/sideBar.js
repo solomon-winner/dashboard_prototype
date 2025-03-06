@@ -40,20 +40,20 @@ const SideBar = () => {
 
   if (isMobile) {
     return (
-      <div className="px-8 mt-6 z-50">
-        <RiMenuUnfold3Line
-          className="text-xl cursor-pointer text-black"
-          onClick={handleToggle}
-        />
+      <div className="mt-6 z-50">
+<RiMenuUnfold3Line
+  className="text-xl cursor-pointer fixed top-6 left-6 text-black self-center"
+  onClick={handleToggle}
+/>
         {isOpen && (
-          <div className="absolute top-0 left-0 w-56 h-[91%] bg-primary rounded-xl m-2 text-white py-3 px-4">
+          <div className="fixed top-0 left-0 w-56 h-[calc(100vh-1rem)] bg-green-900 rounded-xl mt-2 ml-2 text-white py-3 px-4 z-50 overflow-hidden">
             <div className="flex justify-between items-center">
             <img src="./assets/image.png" alt="logo" className="w-[70px] h-[21px] mt-2"/>
             <MdMenuOpen onClick={handleToggle} className="cursor-pointer" />
             </div>
             <div className="mt-5">
               {menuItems.map((item) => (
-                <Menu key={item.text} icon={item.icon} text={item.text} />
+                <Menu key={item.text} icon={item.icon} text={item.text} to= {item.to}/>
               ))}
             </div>
           </div>
@@ -63,7 +63,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className={`w-56 h-[37.5rem] bg-green-900 rounded-xl m-2 text-white py-3 px-4 ${isOpen ? "z-[1000]" : "hidden md:block"} fixed z-[1000]` }>
+    <div className={`w-56 h-[37.5rem] bg-green-900 rounded-xl text-white py-3 px-4 ${isOpen ? "z-[1000]" : "hidden md:block"} fixed z-[1000]` }>
       <div className="flex justify-between items-center">
         <div></div>
         <MdMenuOpen onClick={handleToggle} className="cursor-pointer" />
