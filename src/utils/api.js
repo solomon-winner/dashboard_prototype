@@ -12,9 +12,9 @@ export const login = async () => {
   }
 };
 
-export const register = async () => {
+export const register = async (SignUpData) => {
   try {
-    const response = await apiClient.get('/authentication/register');
+    const response = await apiClient.post('/authentication/register',SignUpData);
     return response.data;
   } catch (error) {
     handleError(error);

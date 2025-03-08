@@ -1,6 +1,26 @@
-import { Link } from 'react-router-dom';
-import Login from "./login.jsx"
+import { Link, useNavigate } from 'react-router-dom';
+import { useRegister } from '../hooks/useAuthentication';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+
 export const SignupPage = () => {
+   const navigate = useNavigate();
+   const [firstName, setfirstName] = useState('');
+   const [lastName, setlastName] = useState('');
+   const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const { mutate:register, isError } = useRegister();
+  const handleSignUp = (e) => {
+     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast('Passwords do not match');
+      return;
+    }
+    register({ firstName, lastName, email, password });
+    !isError && navigate('/login');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
       <div className="bg-white p-8 rounded-lg shadow-xl md:w-96 w-full transition-all duration-300">
@@ -9,22 +29,37 @@ export const SignupPage = () => {
           <p className="text-gray-500">Create your dashboard account</p>
         </div>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSignUp}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
             <input
               type="text"
               required
+              value={firstName}
+              onChange={(e) => setfirstName(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="John Doe"
             />
           </div>
 
           <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+            <input
+              type="text"
+              required
+              value={lastName}
+              onChange={(e) => setlastName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              placeholder="John Doe"
+            />
+          </div>
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="name@company.com"
             />
@@ -35,6 +70,8 @@ export const SignupPage = () => {
             <input
               type="password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="••••••••"
               pattern=".{8,}"
@@ -47,6 +84,8 @@ export const SignupPage = () => {
             <input
               type="password"
               required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="••••••••"
             />

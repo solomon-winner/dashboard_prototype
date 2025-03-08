@@ -1,6 +1,23 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { isAuthenticatedState } from '../state/state';
 
 const LoginPage = () => {
+
+  const [Email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [IsAuthenticated, setIsAuthenticated] = useRecoilState(isAuthenticatedState);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    if (Email && password) { // Replace with actual auth check
+      setIsAuthenticated(true);
+      navigate('/');
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
       <div className="bg-white p-8 rounded-lg shadow-xl md:w-96 w-full transition-all duration-300">
@@ -9,12 +26,14 @@ const LoginPage = () => {
           <p className="text-green-900">Sign in to your dashboard</p>
         </div>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleLogin}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               required
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="name@company.com"
             />
@@ -25,6 +44,8 @@ const LoginPage = () => {
             <input
               type="password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="••••••••"
             />
@@ -78,12 +99,12 @@ const LoginPage = () => {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-gray-500">
+          {/* <p className="mt-6 text-center text-sm text-gray-500">
             Don't have an account?{' '}
             <Link to="/signup" className="text-green-900 hover:text-green-500 font-medium">
               Sign up
-            </Link>
-          </p>
+            </Link> 
+          </p>*/}
         </div>
       </div>
     </div>

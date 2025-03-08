@@ -11,9 +11,12 @@ import Posts from './pages/post.jsx';
 import Login from './pages/login.jsx'; // Import your login component
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRecoilState } from 'recoil';
+import { isAuthenticatedState } from './state/state.js';
+import { SignupPage } from './pages/signUp.jsx';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useRecoilState(isAuthenticatedState);
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated) {
@@ -29,7 +32,7 @@ function App() {
         <Routes>
           {/* Login Route */}
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-
+          <Route path="/signup" element={<SignupPage />} />
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Layout setIsAuthenticated={setIsAuthenticated} />}>

@@ -5,6 +5,11 @@ export const isEditingBannerInfoState = atom({
   default: false,
 });
 
+export const isAuthenticatedState = atom ({
+  key: 'isAuthenticated',
+  default: false
+});
+
 export const isEditingCompanyInfoState = atom({
   key: 'isEditingCompanyInfoState',
   default: false,
