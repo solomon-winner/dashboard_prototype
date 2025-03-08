@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
       <div className="bg-white p-8 rounded-lg shadow-xl md:w-96 w-full transition-all duration-300">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
-          <p className="text-gray-500">Sign in to your dashboard</p>
+          <h1 className="text-3xl font-bold text-green-900 mb-2">Welcome Back</h1>
+          <p className="text-green-900">Sign in to your dashboard</p>
         </div>
 
         <form className="space-y-6">
@@ -35,20 +35,20 @@ export const LoginPage = () => {
               <input
                 id="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="h-4 w-4 text-green-900 focus:ring-green-900 border-green-900 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-green-900">
                 Remember me
               </label>
             </div>
-            <Link to="/forgot-password" className="text-sm text-indigo-600 hover:text-indigo-500">
+            <Link to="/forgot-password" className="text-sm text-green-900 hover:text-green-500">
               Forgot password?
             </Link>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            className="w-full bg-green-900 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
           >
             Sign in
           </button>
@@ -80,7 +80,7 @@ export const LoginPage = () => {
 
           <p className="mt-6 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-indigo-600 hover:text-indigo-500 font-medium">
+            <Link to="/signup" className="text-green-900 hover:text-green-500 font-medium">
               Sign up
             </Link>
           </p>
@@ -89,3 +89,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage
