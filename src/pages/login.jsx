@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isAuthenticatedState } from '../state/state';
+import { useLogin } from '../hooks/useAuthentication';
 
 const LoginPage = () => {
 
   const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [IsAuthenticated, setIsAuthenticated] = useRecoilState(isAuthenticatedState);
-
+  const {mutate:login, isError} = useLogin();
+  const isAuthenticated = useRecoilValue(isAuthenticatedState); 
   const handleLogin = (e) => {
     e.preventDefault();
     
-    if (Email && password) { // Replace with actual auth check
-      setIsAuthenticated(true);
-      navigate('/');
+    if (Email && password) { 
+      login({email: Email, password});
+      isAuthenticated && navigate('/');
     }
   };
   return (

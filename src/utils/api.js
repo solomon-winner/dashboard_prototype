@@ -2,9 +2,9 @@ import apiClient from './apiClient.js';
 import handleError from './errorHandler.js';
 
 // Authentication
-export const login = async () => {
+export const login = async (logiData) => {
   try {
-    const response = await apiClient.get('/authentication/login');
+    const response = await apiClient.post('/authentication/login', logiData);
     return response.data;
   } catch (error) {
     handleError(error);
