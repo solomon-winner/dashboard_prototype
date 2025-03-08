@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isAuthenticatedState } from '../state/state';
 import { useLogin } from '../hooks/useAuthentication';
 
 const LoginPage = () => {
