@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isAuthenticatedState } from '../state/state';
@@ -9,14 +9,18 @@ const LoginPage = () => {
   const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const {mutate:login, isError} = useLogin();
-  const isAuthenticated = useRecoilValue(isAuthenticatedState); 
+  const {mutate:login, data, isLoading} = useLogin();
+  useEffect(() => {
+    if (data) { // When we have successful response data
+        navigate('/');
+    }
+}, [data, navigate]);
+
   const handleLogin = (e) => {
     e.preventDefault();
     
     if (Email && password) { 
       login({email: Email, password});
-      isAuthenticated && navigate('/');
     }
   };
   return (
@@ -71,8 +75,9 @@ const LoginPage = () => {
           <button
             type="submit"
             className="w-full bg-green-900 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            disabled = {isLoading}
           >
-            Sign in
+           {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
